@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Celebramos el Día de las Mamás - 10 de Mayo. GraciasMadre, un tributo especial para las mamás más increíbles del mundo.">
     <title>GraciasMadre — Feliz Día de las Mamás 💐</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="shortcut icon" href="/favicon.svg">
+    <meta name="theme-color" content="#FFB8D0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">

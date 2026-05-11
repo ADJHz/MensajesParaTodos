@@ -112,8 +112,11 @@ RUN mkdir -p \
         storage/framework/views \
         storage/logs \
         bootstrap/cache \
+        /var/log/nginx \
+        /var/lib/nginx/tmp \
     && chown -R www-data:www-data /var/www/html \
     && chmod -R 755 storage bootstrap/cache \
+    && chown -R nginx:nginx /var/log/nginx /var/lib/nginx \
     && ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
 

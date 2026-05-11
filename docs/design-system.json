@@ -1,0 +1,821 @@
+{
+  "projectName": "GraciasMadre",
+  "occasion": "Día de las Mamás — 10 de mayo",
+  "framework": "Laravel + TailwindCSS v4 (@tailwindcss/vite) + Alpine.js + AOS",
+  "generatedAt": "2026-05-10",
+  "notes": "TailwindCSS v4: colores en @theme{} se convierten automáticamente en utilities. Ej: --color-mama-rose → bg-mama-rose, text-mama-rose, border-mama-rose, etc.",
+
+  "colors": {
+    "mamáRose": {
+      "hex": "#FFD6E0",
+      "cssVar": "--color-mama-rose",
+      "tailwindUtility": "mama-rose",
+      "rgb": "255, 214, 224",
+      "usage": "Hero background principal, gradients hero"
+    },
+    "mamáRoseSoft": {
+      "hex": "#FFB8D0",
+      "cssVar": "--color-mama-rose-soft",
+      "tailwindUtility": "mama-rose-soft",
+      "rgb": "255, 184, 208",
+      "usage": "Secciones alternas con rosa, gradients intermedios"
+    },
+    "mamáRoseDeep": {
+      "hex": "#F4A0BF",
+      "cssVar": "--color-mama-rose-deep",
+      "tailwindUtility": "mama-rose-deep",
+      "rgb": "244, 160, 191",
+      "usage": "Bordes de cards, acentos secundarios, hover states de bordes"
+    },
+    "mamáLavender": {
+      "hex": "#E8D5F5",
+      "cssVar": "--color-mama-lavender",
+      "tailwindUtility": "mama-lavender",
+      "rgb": "232, 213, 245",
+      "usage": "Background sección Galería, acento lavanda"
+    },
+    "mamáLavenderDeep": {
+      "hex": "#C9A8E8",
+      "cssVar": "--color-mama-lavender-deep",
+      "tailwindUtility": "mama-lavender-deep",
+      "rgb": "201, 168, 232",
+      "usage": "Bordes y textos de acento en sección lavanda"
+    },
+    "mamáPeach": {
+      "hex": "#FFE4BA",
+      "cssVar": "--color-mama-peach",
+      "tailwindUtility": "mama-peach",
+      "rgb": "255, 228, 186",
+      "usage": "Acento cálido, centro de flores SVG, highlights"
+    },
+    "mamáPeachDeep": {
+      "hex": "#FFCB8A",
+      "cssVar": "--color-mama-peach-deep",
+      "tailwindUtility": "mama-peach-deep",
+      "rgb": "255, 203, 138",
+      "usage": "Bordes melocotón, detalles dorados-cálidos"
+    },
+    "mamáCream": {
+      "hex": "#FFF9F5",
+      "cssVar": "--color-mama-cream",
+      "tailwindUtility": "mama-cream",
+      "rgb": "255, 249, 245",
+      "usage": "Fondo neutro principal (sections Mensaje y Razones), fondos de cards"
+    },
+    "mamáText": {
+      "hex": "#4A3728",
+      "cssVar": "--color-mama-text",
+      "tailwindUtility": "mama-text",
+      "rgb": "74, 55, 40",
+      "usage": "Texto principal de cuerpo, headings oscuros, footer background"
+    },
+    "mamáTextLight": {
+      "hex": "#7A6358",
+      "cssVar": "--color-mama-text-light",
+      "tailwindUtility": "mama-text-light",
+      "rgb": "122, 99, 88",
+      "usage": "Texto secundario, subtítulos, captions, placeholders"
+    },
+    "mamáCta": {
+      "hex": "#D4467A",
+      "cssVar": "--color-mama-cta",
+      "tailwindUtility": "mama-cta",
+      "rgb": "212, 70, 122",
+      "usage": "Botones CTA principales, labels de sección, acentos especiales"
+    },
+    "mamáCtaHover": {
+      "hex": "#B8336A",
+      "cssVar": "--color-mama-cta-hover",
+      "tailwindUtility": "mama-cta-hover",
+      "rgb": "184, 51, 106",
+      "usage": "Estado hover de botones CTA"
+    },
+    "mamáGold": {
+      "hex": "#F0C060",
+      "cssVar": "--color-mama-gold",
+      "tailwindUtility": "mama-gold",
+      "rgb": "240, 192, 96",
+      "usage": "Centro de flores SVG, estrellas decorativas, highlights dorados"
+    },
+    "mamáGreen": {
+      "hex": "#A8D8A8",
+      "cssVar": "--color-mama-green",
+      "tailwindUtility": "mama-green",
+      "rgb": "168, 216, 168",
+      "usage": "Hojas decorativas en SVG de rama"
+    },
+    "mamáGreenDeep": {
+      "hex": "#8DB87A",
+      "cssVar": "--color-mama-green-deep",
+      "tailwindUtility": "mama-green-deep",
+      "rgb": "141, 184, 122",
+      "usage": "Tallos y hojas oscuras en SVG"
+    }
+  },
+
+  "fonts": {
+    "decorative": {
+      "family": "Playfair Display",
+      "cssName": "'Playfair Display', Georgia, 'Times New Roman', serif",
+      "cssVar": "--font-display",
+      "tailwindClass": "font-display",
+      "weights": [400, 600, 700],
+      "styles": ["normal", "italic"],
+      "usage": "H1 hero, H2 de secciones, texto del poema/carta, citas, nombre GraciasMadre en footer"
+    },
+    "body": {
+      "family": "Nunito",
+      "cssName": "'Nunito', system-ui, sans-serif",
+      "cssVar": "--font-body",
+      "tailwindClass": "font-body",
+      "weights": [300, 400, 500, 600, 700],
+      "usage": "Párrafos, labels de form, botones, captions, countdown números complementarios"
+    },
+    "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700&display=swap",
+    "bunnyFontsAlternative": "https://fonts.bunny.net/css?family=playfair-display:400,400i,600,600i,700,700i|nunito:300,400,500,600,700&display=swap",
+    "sizes": {
+      "heroTitle": {
+        "classes": "text-5xl md:text-7xl lg:text-8xl",
+        "weight": "font-bold",
+        "style": "italic",
+        "lineHeight": "leading-tight"
+      },
+      "sectionTitle": {
+        "classes": "text-3xl md:text-4xl lg:text-5xl",
+        "weight": "font-semibold",
+        "lineHeight": "leading-snug"
+      },
+      "cardTitle": {
+        "classes": "text-xl md:text-2xl",
+        "weight": "font-semibold",
+        "lineHeight": "leading-snug"
+      },
+      "body": {
+        "classes": "text-base md:text-lg",
+        "weight": "font-normal",
+        "lineHeight": "leading-relaxed"
+      },
+      "small": {
+        "classes": "text-sm",
+        "weight": "font-light"
+      },
+      "label": {
+        "classes": "text-xs md:text-sm",
+        "weight": "font-semibold",
+        "tracking": "tracking-widest",
+        "transform": "uppercase"
+      }
+    }
+  },
+
+  "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700&display=swap",
+
+  "sections": [
+    {
+      "id": "hero",
+      "name": "Hero",
+      "order": 1,
+      "bladeFile": "sections/hero.blade.php",
+      "purpose": "Capturar atención inmediata, establecer el ambiente festivo, mostrar cuenta regresiva con Alpine.js y guiar al usuario al CTA de dedicatoria",
+      "background": "bg-gradient-to-br from-mama-rose via-mama-rose-soft to-mama-peach",
+      "containerClasses": "relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden px-4 py-24",
+      "elements": [
+        {
+          "type": "decorative-flower-top-left",
+          "description": "SVG flower-pink en esquina superior izquierda, grande y flotante",
+          "classes": "absolute -top-8 -left-8 w-48 h-48 animate-float opacity-60 pointer-events-none",
+          "svgId": "flower-pink",
+          "aos": null
+        },
+        {
+          "type": "decorative-branch-top-right",
+          "description": "SVG branch-leaves en esquina superior derecha, rotado",
+          "classes": "absolute top-0 right-0 w-56 h-44 animate-float-delayed opacity-50 pointer-events-none rotate-12",
+          "svgId": "branch-leaves",
+          "aos": null
+        },
+        {
+          "type": "decorative-heart-bottom-left",
+          "description": "SVG heart pequeño, esquina inferior izquierda",
+          "classes": "absolute bottom-16 left-8 w-12 h-12 animate-pulse-heart opacity-40 pointer-events-none",
+          "svgId": "heart",
+          "aos": null
+        },
+        {
+          "type": "decorative-butterfly-bottom-right",
+          "description": "SVG butterfly en esquina inferior derecha",
+          "classes": "absolute bottom-20 right-12 w-20 h-16 animate-float opacity-50 pointer-events-none",
+          "svgId": "butterfly",
+          "aos": null
+        },
+        {
+          "type": "badge",
+          "tag": "span",
+          "content": "🌸 10 de Mayo, 2026",
+          "classes": "inline-flex items-center gap-2 bg-white/50 backdrop-blur-sm text-mama-text font-body font-semibold text-sm px-5 py-2.5 rounded-full border border-mama-rose-deep/30 mb-8 shadow-sm",
+          "aos": "fade-down",
+          "aosDuration": 600,
+          "aosDelay": 200
+        },
+        {
+          "type": "hero-title",
+          "tag": "h1",
+          "content": "Feliz Día,\nMamá 💐",
+          "classes": "font-display font-bold italic text-5xl md:text-7xl lg:text-8xl text-mama-text leading-tight mb-6",
+          "aos": "fade-up",
+          "aosDuration": 900,
+          "aosDelay": 400
+        },
+        {
+          "type": "subtitle",
+          "tag": "p",
+          "content": "Hoy y siempre, gracias por todo tu amor incondicional",
+          "classes": "font-body text-mama-text-light text-lg md:text-xl max-w-md mx-auto mb-10",
+          "aos": "fade-up",
+          "aosDuration": 800,
+          "aosDelay": 600
+        },
+        {
+          "type": "countdown",
+          "description": "Contador Alpine.js: muestra tiempo restante hasta el 10 de mayo 2026, o mensaje celebración si la fecha ya llegó",
+          "wrapperClasses": "flex flex-wrap gap-3 justify-center mb-10",
+          "xData": "{ days: 0, hours: 0, minutes: 0, seconds: 0, passed: false, init() { this.tick(); setInterval(() => this.tick(), 1000); }, tick() { const target = new Date('2026-05-10T00:00:00'); const now = new Date(); const diff = target - now; if (diff <= 0) { this.passed = true; return; } this.days = Math.floor(diff / 86400000); this.hours = Math.floor((diff % 86400000) / 3600000); this.minutes = Math.floor((diff % 3600000) / 60000); this.seconds = Math.floor((diff % 60000) / 1000); } }",
+          "unitBoxClasses": "bg-white/60 backdrop-blur-sm rounded-2xl px-5 py-3 min-w-[72px] text-center border border-mama-rose-deep/20 shadow-sm",
+          "numberClasses": "font-display font-bold text-3xl text-mama-cta block",
+          "labelClasses": "font-body text-xs text-mama-text-light uppercase tracking-widest mt-1 block",
+          "passedMessageClasses": "font-display italic text-2xl text-mama-cta font-semibold",
+          "passedMessage": "¡Hoy es su día! 🌷",
+          "units": ["días", "horas", "min", "seg"],
+          "aos": "zoom-in",
+          "aosDuration": 800,
+          "aosDelay": 700
+        },
+        {
+          "type": "cta-button",
+          "tag": "a",
+          "content": "💌 Escribirle a mamá",
+          "href": "#dedicatoria",
+          "classes": "inline-flex items-center gap-2 bg-mama-cta hover:bg-mama-cta-hover text-white font-body font-semibold text-lg px-10 py-4 rounded-full transition-all duration-300 hover:shadow-xl hover:shadow-mama-cta/30 hover:-translate-y-1 active:scale-95",
+          "aos": "fade-up",
+          "aosDuration": 600,
+          "aosDelay": 900
+        },
+        {
+          "type": "scroll-hint",
+          "description": "Flecha chevron-down animada con bounce para indicar scroll",
+          "classes": "absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-mama-text-light/50",
+          "aos": null
+        }
+      ]
+    },
+
+    {
+      "id": "mensaje",
+      "name": "Mensaje",
+      "order": 2,
+      "bladeFile": "sections/mensaje.blade.php",
+      "purpose": "Conexión emocional profunda mediante un poema/carta estilizada a las mamás, formato de tarjeta elegante",
+      "background": "bg-mama-cream",
+      "containerClasses": "py-24 px-4",
+      "elements": [
+        {
+          "type": "section-label",
+          "tag": "p",
+          "content": "Con todo nuestro amor",
+          "classes": "font-body font-semibold text-mama-cta text-xs uppercase tracking-widest text-center mb-4",
+          "aos": "fade-up",
+          "aosDuration": 600
+        },
+        {
+          "type": "section-title",
+          "tag": "h2",
+          "content": "Una carta para ti, Mamá",
+          "classes": "font-display font-semibold text-3xl md:text-5xl text-mama-text text-center mb-16",
+          "aos": "fade-up",
+          "aosDuration": 800,
+          "aosDelay": 100
+        },
+        {
+          "type": "carta-card",
+          "description": "Tarjeta estilo carta en papel crema, con comillas decorativas gigantes y poema centrado",
+          "containerClasses": "max-w-2xl mx-auto bg-white rounded-3xl shadow-2xl shadow-mama-rose/15 p-8 md:p-14 relative border border-mama-peach/30",
+          "quoteOpenClasses": "font-display text-9xl text-mama-rose-deep/20 leading-none absolute -top-6 left-8 select-none",
+          "quoteCloseClasses": "font-display text-9xl text-mama-rose-deep/20 leading-none absolute -bottom-12 right-8 select-none",
+          "poemLines": [
+            "Mamá, en tus manos aprendí que el amor",
+            "no necesita palabras,",
+            "porque cada abrazo tuyo lo dice todo.",
+            "",
+            "En tu sonrisa encontré mi primer hogar,",
+            "en tu voz, la melodía más dulce del mundo.",
+            "",
+            "Gracias por ser mi guía, mi fuerza, mi luz.",
+            "Hoy y siempre, este corazón es tuyo."
+          ],
+          "poemClasses": "font-display italic text-lg md:text-xl text-mama-text leading-loose text-center relative z-10",
+          "firmClasses": "font-body text-mama-text-light text-right mt-8 text-sm",
+          "firm": "— Con todo mi amor ❤️",
+          "decorativeLineClasses": "mt-8 border-t border-mama-peach/40 pt-6",
+          "aos": "fade-up",
+          "aosDuration": 1000,
+          "aosDelay": 200
+        },
+        {
+          "type": "decorative-flowers-row",
+          "description": "Fila de 3 flores SVG pequeñas centradas debajo de la carta",
+          "classes": "flex justify-center gap-8 mt-12 opacity-50",
+          "aos": "fade-in",
+          "aosDuration": 1200,
+          "aosDelay": 500
+        }
+      ]
+    },
+
+    {
+      "id": "galeria",
+      "name": "Galería de Momentos",
+      "order": 3,
+      "bladeFile": "sections/galeria.blade.php",
+      "purpose": "Mostrar momentos emotivos con mamá a través de 4 cards con emojis grandes y mensajes breves",
+      "background": "bg-mama-lavender",
+      "containerClasses": "py-24 px-4",
+      "elements": [
+        {
+          "type": "section-label",
+          "tag": "p",
+          "content": "Momentos que atesoro",
+          "classes": "font-body font-semibold text-mama-lavender-deep text-xs uppercase tracking-widest text-center mb-4",
+          "aos": "fade-up",
+          "aosDuration": 600
+        },
+        {
+          "type": "section-title",
+          "tag": "h2",
+          "content": "Recuerdos de amor",
+          "classes": "font-display font-semibold text-3xl md:text-5xl text-mama-text text-center mb-4",
+          "aos": "fade-up",
+          "aosDuration": 800,
+          "aosDelay": 100
+        },
+        {
+          "type": "section-subtitle",
+          "tag": "p",
+          "content": "Cada instante contigo es un tesoro que guardo en el corazón",
+          "classes": "font-body text-mama-text-light text-center text-lg max-w-md mx-auto mb-14",
+          "aos": "fade-up",
+          "aosDuration": 800,
+          "aosDelay": 200
+        },
+        {
+          "type": "cards-grid",
+          "classes": "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto",
+          "cardBaseClasses": "rounded-3xl p-7 flex flex-col items-center text-center hover:shadow-xl hover:shadow-mama-lavender-deep/20 hover:-translate-y-3 transition-all duration-300 cursor-default group",
+          "emojiClasses": "text-5xl mb-4 group-hover:animate-bounce",
+          "cardTitleClasses": "font-display font-semibold text-mama-text text-xl mb-3",
+          "cardTextClasses": "font-body text-mama-text-light text-sm leading-relaxed",
+          "cards": [
+            {
+              "emoji": "🌅",
+              "title": "Las mañanas contigo",
+              "message": "Ese café que preparabas antes de que todos despertaran, llenando la casa de calidez antes del amanecer.",
+              "bgClass": "bg-white",
+              "borderClass": "border border-mama-rose/20",
+              "aos": "flip-left",
+              "aosDuration": 800,
+              "aosDelay": 0
+            },
+            {
+              "emoji": "🍲",
+              "title": "Tu sazón mágica",
+              "message": "Ningún restaurante del mundo podrá superar la comida hecha con tus manos y tu amor.",
+              "bgClass": "bg-mama-rose/20",
+              "borderClass": "border border-mama-rose-deep/20",
+              "aos": "flip-left",
+              "aosDuration": 800,
+              "aosDelay": 150
+            },
+            {
+              "emoji": "🤗",
+              "title": "Tus abrazos infinitos",
+              "message": "En tus brazos aprendí lo que significa sentirse completamente segura y amada.",
+              "bgClass": "bg-white",
+              "borderClass": "border border-mama-peach/20",
+              "aos": "flip-left",
+              "aosDuration": 800,
+              "aosDelay": 300
+            },
+            {
+              "emoji": "⭐",
+              "title": "Tu sabiduría",
+              "message": "Cada consejo tuyo fue una estrella que guió mi camino en los momentos más oscuros.",
+              "bgClass": "bg-mama-peach/20",
+              "borderClass": "border border-mama-peach-deep/20",
+              "aos": "flip-left",
+              "aosDuration": 800,
+              "aosDelay": 450
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "razones",
+      "name": "Por qué las amamos",
+      "order": 4,
+      "bladeFile": "sections/razones.blade.php",
+      "purpose": "Grid visual de 6 razones específicas del amor hacia las mamás con emojis e iconos",
+      "background": "bg-mama-cream",
+      "containerClasses": "py-24 px-4",
+      "elements": [
+        {
+          "type": "section-label",
+          "tag": "p",
+          "content": "Mil razones, un solo nombre",
+          "classes": "font-body font-semibold text-mama-cta text-xs uppercase tracking-widest text-center mb-4",
+          "aos": "fade-up",
+          "aosDuration": 600
+        },
+        {
+          "type": "section-title",
+          "tag": "h2",
+          "content": "¿Por qué la amamos tanto?",
+          "classes": "font-display font-semibold text-3xl md:text-5xl text-mama-text text-center mb-4",
+          "aos": "fade-up",
+          "aosDuration": 800,
+          "aosDelay": 100
+        },
+        {
+          "type": "section-subtitle",
+          "tag": "p",
+          "content": "Por todo lo que eres, lo que das y lo que inspiras cada día",
+          "classes": "font-body text-mama-text-light text-center text-lg max-w-md mx-auto mb-14",
+          "aos": "fade-up",
+          "aosDuration": 800,
+          "aosDelay": 200
+        },
+        {
+          "type": "reasons-grid",
+          "classes": "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto",
+          "cardBaseClasses": "bg-white rounded-2xl p-7 flex flex-col items-center text-center hover:shadow-md hover:shadow-mama-rose/30 hover:-translate-y-1 transition-all duration-300 border border-mama-rose/15 group",
+          "iconClasses": "text-4xl mb-4 group-hover:scale-110 transition-transform duration-300",
+          "titleClasses": "font-display font-semibold text-mama-text text-lg mb-2",
+          "descClasses": "font-body text-mama-text-light text-sm leading-relaxed",
+          "reasons": [
+            {
+              "icon": "💝",
+              "title": "Su amor incondicional",
+              "description": "Ama sin esperar nada a cambio, siempre lista para dar más de lo que tiene.",
+              "aos": "fade-right",
+              "aosDuration": 700,
+              "aosDelay": 0
+            },
+            {
+              "icon": "🦋",
+              "title": "Su fortaleza",
+              "description": "Supera cualquier obstáculo con una gracia y valentía que nos deja sin palabras.",
+              "aos": "fade-up",
+              "aosDuration": 700,
+              "aosDelay": 100
+            },
+            {
+              "icon": "🌸",
+              "title": "Su ternura infinita",
+              "description": "Una caricia suya, una mirada, y cualquier herida del alma queda sanada.",
+              "aos": "fade-left",
+              "aosDuration": 700,
+              "aosDelay": 200
+            },
+            {
+              "icon": "✨",
+              "title": "Su dedicación total",
+              "description": "Se entrega completamente a su familia, sin guardar nada para sí misma.",
+              "aos": "fade-right",
+              "aosDuration": 700,
+              "aosDelay": 300
+            },
+            {
+              "icon": "🎵",
+              "title": "Su alegría contagiosa",
+              "description": "Llena cada rincón de la casa con música, risas y energía positiva.",
+              "aos": "fade-up",
+              "aosDuration": 700,
+              "aosDelay": 400
+            },
+            {
+              "icon": "🌟",
+              "title": "Su ejemplo de vida",
+              "description": "Con su manera de vivir nos enseña cada día a ser mejores personas.",
+              "aos": "fade-left",
+              "aosDuration": 700,
+              "aosDelay": 500
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "dedicatoria",
+      "name": "Dedicatoria",
+      "order": 5,
+      "bladeFile": "sections/dedicatoria.blade.php",
+      "purpose": "Formulario emotivo para que el usuario escriba y envíe un mensaje personalizado a su mamá (manejo de estado con Alpine.js)",
+      "background": "bg-gradient-to-br from-mama-rose via-mama-lavender to-mama-peach",
+      "containerClasses": "py-24 px-4 relative overflow-hidden",
+      "elements": [
+        {
+          "type": "decorative-bg-flowers",
+          "description": "Flores SVG muy grandes y transparentes como patrón de fondo",
+          "classes": "absolute inset-0 overflow-hidden pointer-events-none opacity-10",
+          "svgIds": ["flower-pink", "butterfly"]
+        },
+        {
+          "type": "section-label",
+          "tag": "p",
+          "content": "Tu mensaje especial",
+          "classes": "font-body font-semibold text-mama-cta text-xs uppercase tracking-widest text-center mb-4 relative z-10",
+          "aos": "fade-up",
+          "aosDuration": 600
+        },
+        {
+          "type": "section-title",
+          "tag": "h2",
+          "content": "Escríbele a tu mamá",
+          "classes": "font-display font-semibold text-3xl md:text-5xl text-mama-text text-center mb-4 relative z-10",
+          "aos": "fade-up",
+          "aosDuration": 800,
+          "aosDelay": 100
+        },
+        {
+          "type": "section-subtitle",
+          "tag": "p",
+          "content": "Que las palabras lleguen directo a su corazón",
+          "classes": "font-body text-mama-text-light text-center text-lg max-w-md mx-auto mb-12 relative z-10",
+          "aos": "fade-up",
+          "aosDuration": 800,
+          "aosDelay": 200
+        },
+        {
+          "type": "form-card",
+          "description": "Card glassmorphism con form Alpine.js, muestra mensaje de éxito al enviar",
+          "containerClasses": "max-w-xl mx-auto bg-white/70 backdrop-blur-md rounded-3xl shadow-2xl border border-white/60 p-8 md:p-10 relative z-10",
+          "xData": "{ name: '', message: '', submitted: false, submit() { if (this.name.trim() && this.message.trim()) { this.submitted = true; } } }",
+          "formClasses": "space-y-5",
+          "aos": "zoom-in",
+          "aosDuration": 1000,
+          "aosDelay": 300,
+          "fields": [
+            {
+              "type": "text",
+              "id": "mama-name",
+              "name": "name",
+              "label": "Nombre de tu mamá",
+              "placeholder": "¿Cómo se llama tu mamá? 💕",
+              "xModel": "name",
+              "required": true,
+              "labelClasses": "font-body font-semibold text-mama-text text-sm mb-2 block",
+              "inputClasses": "w-full bg-mama-cream/80 border border-mama-rose-deep/30 rounded-2xl px-5 py-3.5 font-body text-mama-text placeholder-mama-text-light/50 focus:outline-none focus:border-mama-cta focus:ring-2 focus:ring-mama-cta/20 transition-all duration-200"
+            },
+            {
+              "type": "textarea",
+              "id": "mama-message",
+              "name": "message",
+              "label": "Tu dedicatoria",
+              "placeholder": "Escribe aquí tu mensaje con todo el amor del mundo... ✍️",
+              "xModel": "message",
+              "rows": 5,
+              "required": true,
+              "labelClasses": "font-body font-semibold text-mama-text text-sm mb-2 block",
+              "textareaClasses": "w-full bg-mama-cream/80 border border-mama-rose-deep/30 rounded-2xl px-5 py-3.5 font-body text-mama-text placeholder-mama-text-light/50 focus:outline-none focus:border-mama-cta focus:ring-2 focus:ring-mama-cta/20 transition-all duration-200 resize-none"
+            }
+          ],
+          "submitButton": {
+            "type": "submit",
+            "content": "💌 Enviar mi dedicatoria",
+            "classes": "w-full bg-mama-cta hover:bg-mama-cta-hover text-white font-body font-semibold text-lg py-4 rounded-2xl transition-all duration-300 hover:shadow-xl hover:shadow-mama-cta/30 active:scale-95 mt-2"
+          },
+          "successState": {
+            "description": "Estado visible con x-show='submitted' tras submit() exitoso",
+            "wrapperClasses": "text-center py-8",
+            "emoji": "💖",
+            "emojiClasses": "text-6xl mb-4 block animate-pulse-heart",
+            "titleClasses": "font-display font-semibold text-2xl text-mama-text mb-3",
+            "title": "¡Tu mensaje llegó a su corazón!",
+            "subtitleClasses": "font-body text-mama-text-light",
+            "subtitle": "Gracias por celebrar este día tan especial con nosotros."
+          }
+        }
+      ]
+    },
+
+    {
+      "id": "footer",
+      "name": "Footer",
+      "order": 6,
+      "bladeFile": "sections/footer.blade.php",
+      "purpose": "Cierre elegante y emotivo de la landing page con tono oscuro-cálido",
+      "background": "bg-mama-text",
+      "containerClasses": "py-16 px-4 relative overflow-hidden",
+      "elements": [
+        {
+          "type": "top-gradient-line",
+          "description": "Línea decorativa fina en la parte superior del footer",
+          "classes": "absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-mama-rose via-mama-cta to-mama-lavender"
+        },
+        {
+          "type": "bg-texture",
+          "description": "Flores SVG grandes muy transparentes como textura de fondo",
+          "classes": "absolute inset-0 overflow-hidden pointer-events-none opacity-5"
+        },
+        {
+          "type": "logo-flower",
+          "description": "SVG flower-pink centrado, tamaño mediano",
+          "svgId": "flower-pink",
+          "classes": "mx-auto w-16 h-16 mb-6 opacity-70 relative z-10",
+          "aos": "zoom-in",
+          "aosDuration": 800
+        },
+        {
+          "type": "brand-name",
+          "tag": "h3",
+          "content": "GraciasMadre",
+          "classes": "font-display font-bold italic text-3xl text-mama-rose text-center mb-6 relative z-10",
+          "aos": "fade-up",
+          "aosDuration": 800,
+          "aosDelay": 100
+        },
+        {
+          "type": "closing-message",
+          "tag": "p",
+          "content": "Para todas las mamás del mundo: gracias por su amor infinito, su paciencia y su fortaleza. Este día es para ustedes, aunque sepan que las amamos los 365 días del año.",
+          "classes": "font-body text-mama-peach/70 text-center max-w-md mx-auto mb-10 leading-relaxed relative z-10",
+          "aos": "fade-up",
+          "aosDuration": 800,
+          "aosDelay": 200
+        },
+        {
+          "type": "flowers-divider",
+          "description": "Fila de 5 corazones SVG pequeños como separador decorativo",
+          "classes": "flex justify-center gap-4 mb-10 opacity-30 relative z-10",
+          "svgId": "heart",
+          "count": 5,
+          "itemSize": "w-6 h-6",
+          "aos": "fade-in",
+          "aosDuration": 1000,
+          "aosDelay": 300
+        },
+        {
+          "type": "copyright",
+          "tag": "p",
+          "content": "© 2026 GraciasMadre — Hecho con 💗 para todas las mamás del mundo",
+          "classes": "font-body text-mama-text-light/40 text-center text-sm relative z-10",
+          "aos": "fade-up",
+          "aosDuration": 600,
+          "aosDelay": 400
+        }
+      ]
+    }
+  ],
+
+  "svgDecorations": [
+    {
+      "id": "flower-pink",
+      "name": "Flor Rosa de 5 Pétalos",
+      "usage": ["hero (esquina superior izquierda)", "footer (centro, logo)", "mensaje (fila decorativa)"],
+      "recommendedSizes": ["w-12 h-12 (pequeña)", "w-24 h-24 (mediana)", "w-48 h-48 (grande)"],
+      "code": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' aria-hidden='true'><g transform='translate(50,50)'><ellipse cx='0' cy='-22' rx='11' ry='22' fill='#FFD6E0' opacity='0.95'/><ellipse cx='0' cy='-22' rx='11' ry='22' fill='#FFB8D0' opacity='0.95' transform='rotate(72)'/><ellipse cx='0' cy='-22' rx='11' ry='22' fill='#FFD6E0' opacity='0.95' transform='rotate(144)'/><ellipse cx='0' cy='-22' rx='11' ry='22' fill='#FFB8D0' opacity='0.95' transform='rotate(216)'/><ellipse cx='0' cy='-22' rx='11' ry='22' fill='#FFD6E0' opacity='0.95' transform='rotate(288)'/><circle cx='0' cy='0' r='13' fill='#FFE4BA'/><circle cx='0' cy='0' r='7' fill='#F0C060'/></g></svg>"
+    },
+    {
+      "id": "heart",
+      "name": "Corazón Decorativo",
+      "usage": ["hero (esquina inferior izquierda)", "footer (fila separador)", "sección razones (fondo)"],
+      "recommendedSizes": ["w-6 h-6 (tiny)", "w-10 h-10 (pequeño)", "w-16 h-16 (mediano)"],
+      "code": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 90' aria-hidden='true'><path d='M50 82 C50 82 7 52 7 27 C7 13 18 3 32 3 C39 3 46 7 50 13 C54 7 61 3 68 3 C82 3 93 13 93 27 C93 52 50 82 50 82Z' fill='#F4A0BF'/><path d='M50 68 C50 68 15 46 15 28 C15 19 21 11 32 11 C38 11 44 16 50 24' fill='#FFD6E0' opacity='0.45'/></svg>"
+    },
+    {
+      "id": "branch-leaves",
+      "name": "Rama con Hojas y Flores",
+      "usage": ["hero (esquina superior derecha)", "sección mensaje (decoración lateral)"],
+      "recommendedSizes": ["w-32 h-24 (pequeña)", "w-56 h-44 (grande)"],
+      "code": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 130 110' aria-hidden='true'><path d='M85 100 Q65 70 35 25' stroke='#8DB87A' stroke-width='3.5' fill='none' stroke-linecap='round'/><path d='M35 25 Q20 10 10 18' stroke='#8DB87A' stroke-width='2.5' fill='none' stroke-linecap='round'/><path d='M58 64 Q73 44 90 52 Q76 66 58 64Z' fill='#A8D8A8'/><path d='M44 45 Q56 26 72 33 Q60 48 44 45Z' fill='#8DB87A' opacity='0.85'/><path d='M30 26 Q40 9 55 16 Q44 30 30 26Z' fill='#A8D8A8'/><circle cx='35' cy='24' r='5' fill='#F4A0BF'/><circle cx='10' cy='18' r='4' fill='#FFD6E0'/><circle cx='90' cy='52' r='4' fill='#FFB8D0'/></svg>"
+    },
+    {
+      "id": "butterfly",
+      "name": "Mariposa",
+      "usage": ["hero (esquina inferior derecha)", "sección dedicatoria (fondo decorativo)"],
+      "recommendedSizes": ["w-16 h-12 (pequeña)", "w-24 h-20 (mediana)", "w-36 h-28 (grande fondo)"],
+      "code": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 100' aria-hidden='true'><ellipse cx='38' cy='34' rx='33' ry='22' fill='#E8D5F5' transform='rotate(-22 38 34)' opacity='0.88'/><ellipse cx='82' cy='34' rx='33' ry='22' fill='#E8D5F5' transform='rotate(22 82 34)' opacity='0.88'/><ellipse cx='40' cy='64' rx='23' ry='16' fill='#FFD6E0' transform='rotate(22 40 64)' opacity='0.85'/><ellipse cx='80' cy='64' rx='23' ry='16' fill='#FFD6E0' transform='rotate(-22 80 64)' opacity='0.85'/><ellipse cx='60' cy='48' rx='5' ry='26' fill='#4A3728'/><circle cx='60' cy='22' r='4' fill='#4A3728'/><path d='M60 22 Q53 12 55 6' stroke='#4A3728' stroke-width='1.5' fill='none' stroke-linecap='round'/><path d='M60 22 Q67 12 65 6' stroke='#4A3728' stroke-width='1.5' fill='none' stroke-linecap='round'/></svg>"
+    }
+  ],
+
+  "animations": {
+    "aosInit": {
+      "description": "Configuración global de AOS a pasar en AOS.init({})",
+      "duration": 800,
+      "easing": "ease-out-cubic",
+      "once": true,
+      "offset": 80,
+      "mirror": false
+    },
+    "keyframes": {
+      "float": {
+        "description": "Flores y decorativos flotando suavemente arriba/abajo con leve rotación",
+        "css": "@keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); } 33% { transform: translateY(-14px) rotate(4deg); } 66% { transform: translateY(-7px) rotate(-3deg); } }",
+        "duration": "4s",
+        "timing": "ease-in-out",
+        "iteration": "infinite",
+        "tailwindAnimate": "animate-float"
+      },
+      "float-delayed": {
+        "description": "Versión desfasada de float para que los elementos no se muevan sincrónicamente",
+        "css": "@keyframes float-delayed { 0%, 100% { transform: translateY(0px) rotate(0deg); } 33% { transform: translateY(-12px) rotate(-4deg); } 66% { transform: translateY(-6px) rotate(3deg); } }",
+        "duration": "4s",
+        "timing": "ease-in-out",
+        "delay": "2s",
+        "iteration": "infinite",
+        "tailwindAnimate": "animate-float-delayed"
+      },
+      "bloom": {
+        "description": "Efecto de florecimiento: aparece girando desde 0 al tamaño real (entrada dramática)",
+        "css": "@keyframes bloom { 0% { transform: scale(0) rotate(-180deg); opacity: 0; } 60% { transform: scale(1.12) rotate(8deg); opacity: 1; } 100% { transform: scale(1) rotate(0deg); opacity: 1; } }",
+        "duration": "0.9s",
+        "timing": "ease-out",
+        "fillMode": "both",
+        "tailwindAnimate": "animate-bloom"
+      },
+      "pulse-heart": {
+        "description": "Pulso suave de escala para corazones y emojis del success state",
+        "css": "@keyframes pulse-heart { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.18); } }",
+        "duration": "1.4s",
+        "timing": "ease-in-out",
+        "iteration": "infinite",
+        "tailwindAnimate": "animate-pulse-heart"
+      },
+      "petal-fall": {
+        "description": "Pétalos cayendo desde arriba rotando (para partículas decorativas opcionales en Hero)",
+        "css": "@keyframes petal-fall { 0% { transform: translateY(-30px) rotate(0deg) translateX(0); opacity: 1; } 100% { transform: translateY(110vh) rotate(720deg) translateX(40px); opacity: 0; } }",
+        "duration": "6s",
+        "timing": "ease-in",
+        "iteration": "infinite",
+        "tailwindAnimate": "animate-petal-fall"
+      },
+      "shimmer": {
+        "description": "Efecto shimmer en gradiente de texto (opcional para el título del hero)",
+        "css": "@keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }",
+        "duration": "3s",
+        "timing": "linear",
+        "iteration": "infinite",
+        "tailwindAnimate": "animate-shimmer"
+      }
+    },
+    "hover": {
+      "cards": "hover:-translate-y-2 hover:shadow-xl transition-all duration-300",
+      "reasonCards": "hover:-translate-y-1 hover:shadow-md transition-all duration-300",
+      "ctaButton": "hover:-translate-y-1 hover:shadow-xl hover:shadow-mama-cta/30 active:scale-95 transition-all duration-300",
+      "svgIcons": "group-hover:scale-110 transition-transform duration-300",
+      "emojiCards": "group-hover:animate-bounce"
+    }
+  },
+
+  "cssCustomProperties": "/* === PEGAR DENTRO DE @theme {} EN resources/css/app.css === */\n\n  /* Colores GraciasMadre */\n  --color-mama-rose: #FFD6E0;\n  --color-mama-rose-soft: #FFB8D0;\n  --color-mama-rose-deep: #F4A0BF;\n  --color-mama-lavender: #E8D5F5;\n  --color-mama-lavender-deep: #C9A8E8;\n  --color-mama-peach: #FFE4BA;\n  --color-mama-peach-deep: #FFCB8A;\n  --color-mama-cream: #FFF9F5;\n  --color-mama-text: #4A3728;\n  --color-mama-text-light: #7A6358;\n  --color-mama-cta: #D4467A;\n  --color-mama-cta-hover: #B8336A;\n  --color-mama-gold: #F0C060;\n  --color-mama-green: #A8D8A8;\n  --color-mama-green-deep: #8DB87A;\n\n  /* Tipografías */\n  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;\n  --font-body: 'Nunito', system-ui, sans-serif;\n\n  /* Animaciones personalizadas (referencia a keyframes definidos fuera de @theme) */\n  --animate-float: float 4s ease-in-out infinite;\n  --animate-float-delayed: float-delayed 4s ease-in-out 2s infinite;\n  --animate-bloom: bloom 0.9s ease-out both;\n  --animate-pulse-heart: pulse-heart 1.4s ease-in-out infinite;\n  --animate-petal-fall: petal-fall 6s ease-in infinite;\n  --animate-shimmer: shimmer 3s linear infinite;",
+
+  "cssKeyframes": "/* === PEGAR FUERA DE @theme {}, DESPUÉS DEL BLOQUE, EN resources/css/app.css === */\n\n@keyframes float {\n  0%, 100% { transform: translateY(0px) rotate(0deg); }\n  33%       { transform: translateY(-14px) rotate(4deg); }\n  66%       { transform: translateY(-7px) rotate(-3deg); }\n}\n\n@keyframes float-delayed {\n  0%, 100% { transform: translateY(0px) rotate(0deg); }\n  33%       { transform: translateY(-12px) rotate(-4deg); }\n  66%       { transform: translateY(-6px) rotate(3deg); }\n}\n\n@keyframes bloom {\n  0%   { transform: scale(0) rotate(-180deg); opacity: 0; }\n  60%  { transform: scale(1.12) rotate(8deg); opacity: 1; }\n  100% { transform: scale(1) rotate(0deg);   opacity: 1; }\n}\n\n@keyframes pulse-heart {\n  0%, 100% { transform: scale(1); }\n  50%      { transform: scale(1.18); }\n}\n\n@keyframes petal-fall {\n  0%   { transform: translateY(-30px) rotate(0deg) translateX(0); opacity: 1; }\n  100% { transform: translateY(110vh) rotate(720deg) translateX(40px); opacity: 0; }\n}\n\n@keyframes shimmer {\n  0%   { background-position: -200% center; }\n  100% { background-position: 200% center; }\n}",
+
+  "tailwindConfig": {
+    "version": "v4",
+    "configApproach": "CSS-first — no tailwind.config.js necesario. Todo va en resources/css/app.css",
+    "themeBlock": "Usar @theme {} en app.css para definir custom tokens (colores, fuentes, animaciones)",
+    "utilityGeneration": "TailwindCSS v4 genera automáticamente bg-*, text-*, border-*, shadow-* de cada --color-* en @theme",
+    "exampleUsage": {
+      "background": "bg-mama-rose, bg-mama-lavender, bg-mama-cream",
+      "text": "text-mama-text, text-mama-cta, text-mama-text-light",
+      "border": "border-mama-rose-deep",
+      "gradient": "from-mama-rose via-mama-rose-soft to-mama-peach",
+      "font": "font-display (Playfair Display), font-body (Nunito)",
+      "animation": "animate-float, animate-pulse-heart, animate-bloom"
+    },
+    "npmPackagesToInstall": [
+      "aos",
+      "alpinejs"
+    ],
+    "npmInstallCommand": "npm install aos alpinejs",
+    "jsImports": {
+      "appJs": "import Alpine from 'alpinejs';\nimport AOS from 'aos';\nimport 'aos/dist/aos.css';\n\nwindow.Alpine = Alpine;\nAlpine.start();\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  AOS.init({\n    duration: 800,\n    easing: 'ease-out-cubic',\n    once: true,\n    offset: 80\n  });\n});"
+    },
+    "layoutFile": "resources/views/layouts/app.blade.php",
+    "googleFontsLinkTag": "<link rel='preconnect' href='https://fonts.googleapis.com'>\n<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>\n<link href='https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@300;400;500;600;700&display=swap' rel='stylesheet'>",
+    "bladeStructure": {
+      "mainView": "resources/views/welcome.blade.php",
+      "layoutFile": "resources/views/layouts/app.blade.php",
+      "partials": [
+        "resources/views/sections/hero.blade.php",
+        "resources/views/sections/mensaje.blade.php",
+        "resources/views/sections/galeria.blade.php",
+        "resources/views/sections/razones.blade.php",
+        "resources/views/sections/dedicatoria.blade.php",
+        "resources/views/sections/footer.blade.php"
+      ]
+    }
+  }
+}

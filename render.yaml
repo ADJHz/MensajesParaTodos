@@ -1,0 +1,122 @@
+# ══════════════════════════════════════════════════════════════
+# GraciasMadre — Configuración de despliegue en Render
+# https://render.com/docs/infrastructure-as-code
+#
+# INSTRUCCIONES:
+# 1. Sube este repo a GitHub
+# 2. En Render → New → Blueprint y conecta tu repo
+# 3. Render leerá este archivo y creará todos los servicios
+# 4. Actualiza APP_URL con tu dominio de Render después del primer deploy
+# ══════════════════════════════════════════════════════════════
+
+services:
+
+  # ── Aplicación Web (Docker) ────────────────────────────────
+  - type: web
+    name: graciasmadre
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /up
+
+    envVars:
+      # ── Aplicación Laravel ─────────────────────────────────
+      - key: APP_NAME
+        value: "GraciasMadre 💐"
+
+      - key: APP_ENV
+        value: production
+
+      - key: APP_DEBUG
+        value: "false"
+
+      # Render genera APP_KEY automáticamente
+      - key: APP_KEY
+        generateValue: true
+
+      # ⚠️ Actualiza este valor con tu URL de Render después del primer deploy
+      # Ejemplo: https://graciasmadre.onrender.com
+      - key: APP_URL
+        value: https://graciasmadre.onrender.com
+
+      - key: APP_TIMEZONE
+        value: America/Mexico_City
+
+      - key: APP_LOCALE
+        value: es
+
+      - key: APP_FALLBACK_LOCALE
+        value: es
+
+      - key: APP_FAKER_LOCALE
+        value: es_MX
+
+      # ── Base de datos PostgreSQL (gratis en Render) ────────
+      # Las variables DB_* se llenan automáticamente desde la BD de abajo
+      - key: DB_CONNECTION
+        value: pgsql
+
+      - key: DB_HOST
+        fromDatabase:
+          name: graciasmadre-db
+          property: host
+
+      - key: DB_PORT
+        fromDatabase:
+          name: graciasmadre-db
+          property: port
+
+      - key: DB_DATABASE
+        fromDatabase:
+          name: graciasmadre-db
+          property: database
+
+      - key: DB_USERNAME
+        fromDatabase:
+          name: graciasmadre-db
+          property: user
+
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: graciasmadre-db
+          property: password
+
+      # ── Sesiones y caché ────────────────────────────────────
+      - key: SESSION_DRIVER
+        value: database
+
+      - key: SESSION_LIFETIME
+        value: "120"
+
+      - key: CACHE_STORE
+        value: database
+
+      - key: QUEUE_CONNECTION
+        value: sync
+
+      # ── Logs (Render captura stderr/stdout automáticamente) ─
+      - key: LOG_CHANNEL
+        value: stderr
+
+      - key: LOG_LEVEL
+        value: warning
+
+      # ── Mail (configura según tu proveedor) ─────────────────
+      - key: MAIL_MAILER
+        value: log
+
+      - key: MAIL_FROM_ADDRESS
+        value: hola@graciasmadre.mx
+
+      - key: MAIL_FROM_NAME
+        value: "GraciasMadre 💐"
+
+# ── Base de datos PostgreSQL gratuita ─────────────────────────
+# Nota: La capa gratuita de Render expira a los 90 días.
+# Para producción permanente, considera el plan Starter ($7/mes).
+databases:
+  - name: graciasmadre-db
+    databaseName: graciasmadre
+    plan: free
+    region: oregon

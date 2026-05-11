@@ -1,0 +1,59 @@
+# ── Control de versiones ──────────────────────────────────────
+.git
+.gitignore
+.gitattributes
+
+# ── Dependencias (se instalan dentro del build) ───────────────
+node_modules/
+vendor/
+
+# ── Archivos de entorno ───────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Assets que se compilan en el build ───────────────────────
+public/build/
+public/hot
+
+# ── Caché y archivos generados ────────────────────────────────
+bootstrap/cache/*.php
+storage/framework/cache/
+storage/framework/sessions/
+storage/framework/views/
+storage/logs/
+
+# ── Tests ─────────────────────────────────────────────────────
+tests/
+phpunit.xml
+coverage/
+
+# ── Herramientas de desarrollo ────────────────────────────────
+*.md
+!README.md
+.editorconfig
+.styleci.yml
+.php-cs-fixer.php
+.phpunit.result.cache
+psalm.xml
+phpstan.neon
+
+# ── Sistemas operativos ───────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ── IDEs y editores ───────────────────────────────────────────
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ── Docker local ─────────────────────────────────────────────
+docker-compose.override.yml

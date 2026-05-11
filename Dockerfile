@@ -50,6 +50,7 @@ RUN apk add --no-cache \
     curl \
     bash \
     tzdata \
+    ca-certificates \
     netcat-openbsd \
     libpng-dev \
     libjpeg-turbo-dev \
@@ -59,6 +60,7 @@ RUN apk add --no-cache \
     icu-dev \
     oniguruma-dev \
     postgresql-dev \
+    && update-ca-certificates \
     && docker-php-ext-configure gd \
         --with-freetype \
         --with-jpeg \

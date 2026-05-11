@@ -1,12 +1,6 @@
 # ══════════════════════════════════════════════════════════════
 # GraciasMadre — Configuración de despliegue en Render
-# https://render.com/docs/infrastructure-as-code
-#
-# INSTRUCCIONES:
-# 1. Sube este repo a GitHub
-# 2. En Render → New → Blueprint y conecta tu repo
-# 3. Render leerá este archivo y creará todos los servicios
-# 4. Actualiza APP_URL con tu dominio de Render después del primer deploy
+# Base de datos: TiDB Cloud (MySQL compatible)
 # ══════════════════════════════════════════════════════════════
 
 services:
@@ -31,13 +25,14 @@ services:
       - key: APP_DEBUG
         value: "false"
 
-      # Render genera APP_KEY automáticamente
       - key: APP_KEY
         generateValue: true
 
-      # ⚠️ Actualiza este valor con tu URL de Render después del primer deploy
-      # Ejemplo: https://graciasmadre.onrender.com
       - key: APP_URL
+        value: https://graciasmadre.onrender.com
+
+      # ASSET_URL asegura que Vite sirva assets sobre HTTPS
+      - key: ASSET_URL
         value: https://graciasmadre.onrender.com
 
       - key: APP_TIMEZONE
@@ -52,35 +47,28 @@ services:
       - key: APP_FAKER_LOCALE
         value: es_MX
 
-      # ── Base de datos PostgreSQL (gratis en Render) ────────
-      # Las variables DB_* se llenan automáticamente desde la BD de abajo
+      # ── Base de datos TiDB Cloud (MySQL compatible) ─────────
       - key: DB_CONNECTION
-        value: pgsql
+        value: mysql
 
       - key: DB_HOST
-        fromDatabase:
-          name: graciasmadre-db
-          property: host
+        sync: false   # Ingresar en el dashboard de Render → Environment
 
       - key: DB_PORT
-        fromDatabase:
-          name: graciasmadre-db
-          property: port
+        value: "4000"
 
       - key: DB_DATABASE
-        fromDatabase:
-          name: graciasmadre-db
-          property: database
+        value: graciasmadre
 
       - key: DB_USERNAME
-        fromDatabase:
-          name: graciasmadre-db
-          property: user
+        sync: false   # Ingresar en el dashboard de Render → Environment
 
       - key: DB_PASSWORD
-        fromDatabase:
-          name: graciasmadre-db
-          property: password
+        sync: false   # Ingresar en el dashboard de Render → Environment
+
+      # Certificado SSL del sistema Alpine — requerido por TiDB Cloud
+      - key: MYSQL_ATTR_SSL_CA
+        value: /etc/ssl/certs/ca-certificates.crt
 
       # ── Sesiones y caché ────────────────────────────────────
       - key: SESSION_DRIVER
@@ -95,14 +83,14 @@ services:
       - key: QUEUE_CONNECTION
         value: sync
 
-      # ── Logs (Render captura stderr/stdout automáticamente) ─
+      # ── Logs ─────────────────────────────────────────────────
       - key: LOG_CHANNEL
         value: stderr
 
       - key: LOG_LEVEL
         value: warning
 
-      # ── Mail (configura según tu proveedor) ─────────────────
+      # ── Mail ─────────────────────────────────────────────────
       - key: MAIL_MAILER
         value: log
 
@@ -111,12 +99,3 @@ services:
 
       - key: MAIL_FROM_NAME
         value: "GraciasMadre 💐"
-
-# ── Base de datos PostgreSQL gratuita ─────────────────────────
-# Nota: La capa gratuita de Render expira a los 90 días.
-# Para producción permanente, considera el plan Starter ($7/mes).
-databases:
-  - name: graciasmadre-db
-    databaseName: graciasmadre
-    plan: free
-    region: oregon

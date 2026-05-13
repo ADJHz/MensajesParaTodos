@@ -19,7 +19,7 @@
         ? \Illuminate\Support\Facades\Storage::url($mensajeActual->personaje_path)
         : null;
     $personajeEstilo = $mensajeActual->personaje_estilo ?? 'adventurer';
-    $personajeSeed   = $mensajeActual->personaje_seed   ?? ($mensajeActual->destinatario ?? '{{ config('app.name') }}');
+    $personajeSeed   = $mensajeActual->personaje_seed   ?? ($mensajeActual->destinatario ?? config('app.name'));
 @endphp
 
 {{-- Canvas tsParticles (motor JS rico) --}}

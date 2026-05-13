@@ -19,7 +19,7 @@
         avataaars, bottts (robots), shapes, identicon, thumbs
 --}}
 @php
-    $seed     = $seed ?? '{{ config('app.name') }}';
+    $seed     = $seed ?? config('app.name');
     $estilo   = $estilo ?? 'adventurer';
     $tamano   = (int) ($tamano ?? 128);
     $flotante = $flotante ?? true;

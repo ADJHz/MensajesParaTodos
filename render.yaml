@@ -71,6 +71,9 @@ services:
         value: /etc/ssl/certs/ca-certificates.crt
 
       # ── Sesiones y caché ────────────────────────────────────
+      - key: FILESYSTEM_DISK
+        value: public
+
       - key: SESSION_DRIVER
         value: database
 

@@ -38,8 +38,22 @@ echo "🗃️  Ejecutando migraciones..."
 php artisan migrate --force --no-interaction
 
 # ── Enlace de almacenamiento público ─────────────────────────
-echo "🔗 Creando enlace de storage..."
-php artisan storage:link --force 2>/dev/null || true
+echo "🔗 Verificando enlace public/storage..."
+
+# Si existe como carpeta/archivo normal, rompe el symlink y causa 404 en imágenes.
+if [ -e "public/storage" ] && [ ! -L "public/storage" ]; then
+    echo "⚠️  public/storage existe y no es symlink. Reemplazando por enlace..."
+    rm -rf public/storage
+fi
+
+php artisan storage:link --force
+
+if [ ! -L "public/storage" ]; then
+    echo "❌ No se pudo crear el enlace simbólico public/storage"
+    exit 1
+fi
+
+echo "✅ Enlace public/storage listo"
 
 # ── Optimizaciones de producción ─────────────────────────────
 if [ "$APP_ENV" = "production" ]; then

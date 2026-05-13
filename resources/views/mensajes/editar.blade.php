@@ -329,12 +329,14 @@
                         <div class="grid grid-cols-4 sm:grid-cols-7 gap-2">
                             @foreach($formaOpts as $val => [$label, $shapeStyle])
                                 <label class="opt-card rounded-xl p-2 text-center"
-                                       :class="imagenForma === '{{ $val }}' ? 'selected' : ''">
+                                       :class="{ 'selected': imagenForma === '{{ $val }}' }"
+                                       @click="imagenForma = '{{ $val }}'">
                                     <span class="check-pin">✓</span>
                                     <input type="radio"
                                            name="imagen_forma"
                                            value="{{ $val }}"
                                            x-model="imagenForma"
+                                           :checked="imagenForma === '{{ $val }}'"
                                            class="sr-only">
                                     <div class="mx-auto w-12 h-12 flex items-center justify-center">
                                         <div style="width:44px;height:44px;{{ $shapeGradient }}{{ $shapeStyle }}"></div>
@@ -363,12 +365,14 @@
                         <div class="grid grid-cols-4 sm:grid-cols-7 gap-3">
                             @foreach($marcoOpts as $val => [$label, $marcoStyle])
                                 <label class="opt-card rounded-xl p-2 pt-3 text-center"
-                                       :class="imagenMarco === '{{ $val }}' ? 'selected' : ''">
+                                       :class="{ 'selected': imagenMarco === '{{ $val }}' }"
+                                       @click="imagenMarco = '{{ $val }}'">
                                     <span class="check-pin">✓</span>
                                     <input type="radio"
                                            name="imagen_marco"
                                            value="{{ $val }}"
                                            x-model="imagenMarco"
+                                           :checked="imagenMarco === '{{ $val }}'"
                                            class="sr-only">
                                     <div class="mx-auto w-14 h-14 flex items-center justify-center">
                                         <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#fde68a,#fbcfe8);{{ $marcoStyle }}"></div>

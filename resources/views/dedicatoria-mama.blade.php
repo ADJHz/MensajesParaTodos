@@ -181,7 +181,7 @@
 
         {{-- Marca --}}
         <a href="/"
-           aria-label="Volver a GraciasMadre"
+           aria-label="Volver a {{ config('app.name') }}"
            class="mb-8 sm:mb-10 text-xs sm:text-sm font-semibold tracking-widest uppercase opacity-60 hover:opacity-100 transition-opacity"
            style="font-family:'Nunito',sans-serif; color:#D4467A;">
             Gracias Mamá <span aria-hidden="true">💐</span>

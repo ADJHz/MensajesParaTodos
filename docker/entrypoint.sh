@@ -7,7 +7,7 @@ set -e
 
 echo ""
 echo "🌸 ═══════════════════════════════════════════ 🌸"
-echo "       GraciasMadre — Iniciando servidor        "
+echo "       Mensajes para todos💐 — Iniciando servidor        "
 echo "🌸 ═══════════════════════════════════════════ 🌸"
 echo ""
 
@@ -56,7 +56,7 @@ else
 fi
 
 echo ""
-echo "💐 ¡GraciasMadre lista! Escuchando en el puerto 80"
+echo "💐 Mensajes para todos lista! Escuchando en el puerto 80"
 echo ""
 
 exec "$@"

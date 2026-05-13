@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', '"Gracias Mamá 💐"'),
+    'name' => env('APP_NAME', 'Mensajes para todos'),
 
     /*
     |--------------------------------------------------------------------------

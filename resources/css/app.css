@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@source '../../node_modules/flowbite/**/*.js';
+
+[x-cloak] { display: none !important; }
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -12,6 +15,10 @@
         "Noto Color Emoji";
     --font-display: 'Playfair Display', Georgia, serif;
     --font-body: 'Nunito', sans-serif;
+    --font-app-heading: 'Poppins', 'Nunito', sans-serif;
+    --font-app-body: 'Nunito', sans-serif;
+
+    /* Módulo Día de las Madres */
     --color-mama-rose: #FFD6E0;
     --color-mama-rose-soft: #FFB8D0;
     --color-mama-rose-deep: #F4A0BF;
@@ -21,6 +28,16 @@
     --color-mama-text: #4A3728;
     --color-mama-cta: #D4467A;
     --color-mama-gold: #C9956E;
+
+    /* Plataforma "Mensajes para Todos" */
+    --color-app-bg: #F5F3FF;
+    --color-app-text: #1F2937;
+    --color-app-muted: #6B7280;
+    --color-app-violet: #7C3AED;
+    --color-app-violet-light: #EDE9FE;
+    --color-app-pink: #DB2777;
+    --color-app-amber: #F59E0B;
+    --color-app-emerald: #10B981;
 }
 
 @keyframes float-slow {
@@ -52,8 +69,11 @@
 .animate-float-medium { animation: float-medium 4s ease-in-out infinite; }
 .animate-petal-spin { animation: petal-spin 8s linear infinite; }
 .animate-heartbeat { animation: heartbeat 1.5s ease infinite; }
+.animate-bounce-slow { animation: bounce 3s ease-in-out infinite; }
 .font-display { font-family: var(--font-display); }
 .font-body { font-family: var(--font-body); }
+.font-app-heading { font-family: var(--font-app-heading); }
+.font-app-body { font-family: var(--font-app-body); }
 .bg-shimmer {
   background: linear-gradient(90deg, #FFD6E0 0%, #FFB8D0 50%, #FFD6E0 100%);
   background-size: 200% auto;

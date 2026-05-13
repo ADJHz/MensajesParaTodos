@@ -35,4 +35,28 @@ return [
         ],
     ],
 
+    'google' => [
+        'client_id'     => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect'      => env('GOOGLE_REDIRECT_URI', '/auth/google/callback'),
+    ],
+
+    'stripe' => [
+        'key'            => env('STRIPE_KEY'),
+        'secret'         => env('STRIPE_SECRET'),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+    ],
+
+    'openrouter' => [
+        'key'     => env('OPENROUTER_API_KEY'),
+        'models'  => env('OPENROUTER_MODEL', 'deepseek/deepseek-chat-v3-0324:free'),
+        'referer' => env('APP_URL', 'http://localhost'),
+        'title'   => env('APP_NAME', 'Mensajes para todos'),
+    ],
+
+    'groq' => [
+        'key'    => env('GROQ_API_KEY'),
+        'models' => env('GROQ_MODEL', 'llama-3.3-70b-versatile,llama-3.1-8b-instant'),
+    ],
+
 ];

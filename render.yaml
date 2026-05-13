@@ -1,5 +1,5 @@
 # ══════════════════════════════════════════════════════════════
-# GraciasMadre — Configuración de despliegue en Render
+# Mensajes para todos — Configuración de despliegue en Render
 # Base de datos: TiDB Cloud (MySQL compatible)
 # ══════════════════════════════════════════════════════════════
 
@@ -7,7 +7,7 @@ services:
 
   # ── Aplicación Web (Docker) ────────────────────────────────
   - type: web
-    name: graciasmadre
+    name: mensajes-para-todos
     runtime: docker
     plan: free
     region: oregon
@@ -17,7 +17,7 @@ services:
     envVars:
       # ── Aplicación Laravel ─────────────────────────────────
       - key: APP_NAME
-        value: "GraciasMadre 💐"
+        value: "Mensajes para todos"
 
       - key: APP_ENV
         value: production
@@ -29,11 +29,11 @@ services:
         generateValue: true
 
       - key: APP_URL
-        value: https://graciasmadre.onrender.com
+        value: https://mensajesparatodos.onrender.com
 
       # ASSET_URL asegura que Vite sirva assets sobre HTTPS
       - key: ASSET_URL
-        value: https://graciasmadre.onrender.com
+        value: https://mensajesparatodos.onrender.com
 
       - key: APP_TIMEZONE
         value: America/Mexico_City
@@ -58,7 +58,7 @@ services:
         value: "4000"
 
       - key: DB_DATABASE
-        value: graciasmadre
+        value: mensajes_para_todos
 
       - key: DB_USERNAME
         sync: false   # Ingresar en el dashboard de Render → Environment
@@ -95,7 +95,7 @@ services:
         value: log
 
       - key: MAIL_FROM_ADDRESS
-        value: hola@graciasmadre.mx
+        value: hola@tu-dominio.com
 
       - key: MAIL_FROM_NAME
-        value: "GraciasMadre 💐"
+        value: "Mensajes para todos 💐"

@@ -171,28 +171,38 @@
                     <label for="mensaje" class="block text-sm font-semibold text-gray-800 mb-1">
                         Tu mensaje <span class="text-red-500">*</span>
                     </label>
-                    <div class="mb-2 flex flex-wrap items-center gap-2">
+                    <textarea name="mensaje"
+                              id="mensaje"
+                              required
+                              maxlength="30000"
+                              rows="10"
+                              x-model="mensaje"
+                              class="block w-full rounded-lg border-gray-300 focus:border-violet-500 focus:ring-violet-500 text-base px-4 py-3 leading-relaxed"
+                              placeholder="Escribe desde el corazón…">{{ old('mensaje', strip_tags($mensaje->mensaje)) }}</textarea>
+                    {{-- Helpers: Emojis & Stickers (debajo del textarea, popover hacia arriba) --}}
+                    <div class="mt-3 flex flex-wrap items-center gap-2">
+                        <span class="text-xs font-semibold text-gray-400 mr-1 hidden sm:inline">Agregar:</span>
                         <div class="relative" @click.outside="emojiPanelAbierto = false">
                             <button type="button"
                                     @click="emojiPanelAbierto = !emojiPanelAbierto; stickerPanelAbierto = false"
-                                    class="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-violet-200 bg-violet-50 text-violet-700 text-sm font-semibold hover:bg-violet-100 transition">
-                                <span>😊</span>
+                                    class="inline-flex items-center gap-2 px-3.5 py-2 rounded-full border border-violet-200 bg-white text-violet-700 text-sm font-semibold shadow-sm hover:bg-violet-50 hover:border-violet-300 active:scale-95 transition">
+                                <span class="text-base leading-none">😊</span>
                                 <span>Emojis</span>
                             </button>
-                            <div x-show="emojiPanelAbierto" x-cloak
-                                 class="absolute left-0 top-12 z-20 w-[320px] max-w-[85vw] rounded-2xl border border-violet-100 bg-white shadow-2xl p-2">
+                            <div x-show="emojiPanelAbierto" x-cloak x-transition.opacity.duration.150ms
+                                 class="absolute left-0 bottom-full mb-2 z-30 w-[320px] max-w-[85vw] rounded-2xl border border-violet-100 bg-white shadow-2xl p-2">
                                 <emoji-picker x-ref="editarEmojiPicker" class="light app-emoji-picker" locale="es"></emoji-picker>
                             </div>
                         </div>
                         <div class="relative" @click.outside="stickerPanelAbierto = false">
                             <button type="button"
                                     @click="stickerPanelAbierto = !stickerPanelAbierto; emojiPanelAbierto = false"
-                                    class="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-pink-200 bg-pink-50 text-pink-700 text-sm font-semibold hover:bg-pink-100 transition">
-                                <span>🎀</span>
+                                    class="inline-flex items-center gap-2 px-3.5 py-2 rounded-full border border-pink-200 bg-white text-pink-700 text-sm font-semibold shadow-sm hover:bg-pink-50 hover:border-pink-300 active:scale-95 transition">
+                                <span class="text-base leading-none">🎀</span>
                                 <span>Stickers</span>
                             </button>
-                            <div x-show="stickerPanelAbierto" x-cloak
-                                 class="absolute left-0 top-12 z-20 w-72 max-w-[85vw] rounded-2xl border border-pink-100 bg-white shadow-2xl p-3">
+                            <div x-show="stickerPanelAbierto" x-cloak x-transition.opacity.duration.150ms
+                                 class="absolute left-0 bottom-full mb-2 z-30 w-72 max-w-[85vw] rounded-2xl border border-pink-100 bg-white shadow-2xl p-3">
                                 <p class="text-xs font-semibold text-gray-500 mb-2">Agrégalos al mensaje</p>
                                 <div class="grid grid-cols-4 gap-2">
                                     @foreach(['💖','✨','🌸','🎀','🦋','🥰','💐','🌷','💘','⭐','💕','🤍'] as $sticker)
@@ -204,15 +214,7 @@
                             </div>
                         </div>
                     </div>
-                    <textarea name="mensaje"
-                              id="mensaje"
-                              required
-                              maxlength="30000"
-                              rows="10"
-                              x-model="mensaje"
-                              class="block w-full rounded-lg border-gray-300 focus:border-violet-500 focus:ring-violet-500 text-base px-4 py-3 leading-relaxed"
-                              placeholder="Escribe desde el corazón…">{{ old('mensaje', strip_tags($mensaje->mensaje)) }}</textarea>
-                    <p class="text-xs text-gray-500 mt-1">Ahora también puedes insertar emojis y stickers decorativos. ✨</p>
+                    <p class="text-xs text-gray-500 mt-2">Ahora también puedes insertar emojis y stickers decorativos. ✨</p>
                     @error('mensaje')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
                 </div>
 

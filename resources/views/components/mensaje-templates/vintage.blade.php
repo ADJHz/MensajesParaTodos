@@ -63,7 +63,7 @@
                 <div class="float-right ml-4 mb-4">
                     <div style="{{ $estiloMarco ?: 'filter:drop-shadow(2px 3px 8px rgba(0,0,0,0.3));' }}">
                         <div class="w-28 h-28 overflow-hidden" style="{{ $estiloForma ?: 'border-radius:4px;' }}">
-                            <img src="{{ $imagenUrl }}" alt="Foto" class="w-full h-full object-cover">
+                            <img src="{{ $imagenUrl }}" alt="Foto" class="w-full h-full object-contain bg-white">
                         </div>
                     </div>
                 </div>

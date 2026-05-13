@@ -72,7 +72,7 @@
                 <div class="flex justify-center -mt-12 mb-6">
                     <div style="{{ $estiloMarco ?: 'filter:drop-shadow(0 6px 12px rgba(0,0,0,0.2));' }}" class="ring-4 ring-white rounded-2xl">
                         <div class="w-24 h-24 overflow-hidden" style="{{ $estiloForma ?: 'border-radius:1rem;' }}">
-                            <img src="{{ $imagenUrl }}" alt="Foto" class="w-full h-full object-cover">
+                            <img src="{{ $imagenUrl }}" alt="Foto" class="w-full h-full object-contain bg-white">
                         </div>
                     </div>
                 </div>

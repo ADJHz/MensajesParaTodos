@@ -94,7 +94,7 @@
         @keyframes star-glow { 0%,100%{filter: drop-shadow(0 0 8px #FFD700);} 50%{filter: drop-shadow(0 0 20px #FFD700);} }
         .star-top { animation: star-glow 2s ease-in-out infinite; }
 
-        .img-shape { width: 180px; height: 180px; object-fit: cover; }
+        .img-shape { width: 180px; height: 180px; object-fit: contain; background:#fff; }
 
         /* Guirnalda */
         .guirnalda {

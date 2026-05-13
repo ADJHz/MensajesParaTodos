@@ -262,7 +262,7 @@
                                 <img src="{{ \Illuminate\Support\Facades\Storage::url($mensaje->imagen_path) }}"
                                      alt="Foto de {{ $mensaje->destinatario }}"
                                      class="img-{{ $mensaje->imagen_forma ?? 'cuadrado' }} marco-{{ $mensaje->imagen_marco ?? 'vintage' }}"
-                                     style="width:220px;height:220px;object-fit:cover;">
+                                     style="width:220px;height:220px;object-fit:contain;background:#fff;">
                                 <p class="hand text-sm text-[#3E2A14] text-center mt-2">{{ $mensaje->destinatario }}</p>
                             </div>
                         </figure>

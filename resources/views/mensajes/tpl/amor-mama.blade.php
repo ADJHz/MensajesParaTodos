@@ -161,7 +161,7 @@
                                 <img src="{{ \Illuminate\Support\Facades\Storage::url($mensaje->imagen_path) }}"
                                      alt="Foto de {{ $mensaje->destinatario }}"
                                      class="img-{{ $mensaje->imagen_forma ?? 'circulo' }} marco-{{ $mensaje->imagen_marco ?? 'flores' }}"
-                                     style="width:200px;height:200px;object-fit:cover;">
+                                     style="width:200px;height:200px;object-fit:contain;background:#fff;">
                             </figure>
                         @endif
 

@@ -104,7 +104,7 @@
         .scale-in{ animation: scale-in 1.2s cubic-bezier(.34,1.56,.64,1) forwards; opacity:0; }
 
         /* ── Imagen forma/marco ── */
-        .img-shape{ width:160px; height:160px; object-fit:cover; }
+        .img-shape{ width:160px; height:160px; object-fit:contain; background:#fff; }
         .shape-circulo  { border-radius:50%; }
         .shape-cuadrado { border-radius:8px; }
         .shape-corazon  { clip-path: path('M80 145 C 35 110, 0 78, 0 45 C 0 18, 24 0, 42 0 C 62 0, 75 14, 80 28 C 85 14, 98 0, 118 0 C 136 0, 160 18, 160 45 C 160 78, 125 110, 80 145 Z'); border-radius:0; }

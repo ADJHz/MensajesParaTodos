@@ -135,7 +135,7 @@ function livePreview() {
             const estiloForma = formas[d.imagenForma] || '';
             const estiloMarco = marcos[d.imagenMarco] || '';
             const imgHtml = d.imagenPreview
-                ? `<div style="${estiloMarco}" class="flex justify-center my-3"><div style="width:80px;height:80px;overflow:hidden;${estiloForma}"><img src="${d.imagenPreview}" style="width:100%;height:100%;object-fit:cover;" alt=""></div></div>`
+                ? `<div style="${estiloMarco}" class="flex justify-center my-3"><div style="width:80px;height:80px;overflow:hidden;${estiloForma}"><img src="${d.imagenPreview}" style="width:100%;height:100%;object-fit:contain;background:#fff;" alt=""></div></div>`
                 : '';
 
             const configs = {

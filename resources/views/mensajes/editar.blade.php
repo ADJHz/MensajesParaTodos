@@ -5,32 +5,44 @@
 @push('styles')
 <style>
     [x-cloak] { display: none !important; }
+    /* Shapes — porcentajes para que escalen a cualquier tamaño */
     .shape-ninguna  { border-radius: 0.75rem; }
     .shape-cuadrado { border-radius: 0.5rem; }
     .shape-circulo  { border-radius: 9999px; }
-    .shape-corazon  { clip-path: path('M50,90 C20,65 0,45 0,25 C0,10 12,0 25,0 C35,0 45,7 50,18 C55,7 65,0 75,0 C88,0 100,10 100,25 C100,45 80,65 50,90 Z'); }
-    .shape-estrella { clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+    .shape-corazon  { clip-path: polygon(50% 95%, 5% 55%, 5% 25%, 22% 8%, 38% 8%, 50% 22%, 62% 8%, 78% 8%, 95% 25%, 95% 55%); }
+    .shape-estrella { clip-path: polygon(50% 2%, 61% 35%, 96% 35%, 68% 57%, 79% 92%, 50% 70%, 21% 92%, 32% 57%, 4% 35%, 39% 35%); }
     .shape-hexagono { clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%); }
     .shape-diamante { clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
 
+    /* Marcos — anillos de color visibles */
     .marco-ninguno { box-shadow: none; }
     .marco-morado  { box-shadow: 0 0 0 4px #8b5cf6, 0 8px 20px -8px rgba(139,92,246,.6); }
     .marco-dorado  { box-shadow: 0 0 0 4px #f59e0b, 0 8px 20px -8px rgba(245,158,11,.6); }
     .marco-rosa    { box-shadow: 0 0 0 4px #ec4899, 0 8px 20px -8px rgba(236,72,153,.6); }
     .marco-verde   { box-shadow: 0 0 0 4px #10b981, 0 8px 20px -8px rgba(16,185,129,.6); }
-    .marco-sombra  { box-shadow: 0 12px 32px -10px rgba(0,0,0,.45); }
-    .marco-blanco  { box-shadow: 0 0 0 6px #fff, 0 10px 24px -10px rgba(0,0,0,.35); }
+    .marco-sombra  { box-shadow: 0 12px 32px -8px rgba(0,0,0,.55); }
+    .marco-blanco  { box-shadow: 0 0 0 6px #fff, 0 0 0 7px #e5e7eb, 0 10px 24px -10px rgba(0,0,0,.35); }
 
     .opt-card {
+        position: relative;
         cursor: pointer;
         transition: all .15s ease;
-        border: 2px solid transparent;
+        border: 2px solid #e5e7eb;
+        background: #fff;
     }
-    .opt-card:hover { transform: translateY(-1px); }
+    .opt-card:hover { transform: translateY(-1px); border-color: #c4b5fd; }
     .opt-card.selected {
         border-color: #8b5cf6;
         background: #f5f3ff;
+        box-shadow: 0 0 0 3px rgba(139,92,246,.25);
     }
+    .opt-card .check-pin {
+        position: absolute; top: 4px; right: 4px;
+        width: 18px; height: 18px; border-radius: 9999px;
+        background: #8b5cf6; color: #fff; font-size: 11px; font-weight: 700;
+        display: none; align-items: center; justify-content: center; line-height: 1;
+    }
+    .opt-card.selected .check-pin { display: inline-flex; }
     .tpl-card {
         cursor: pointer;
         transition: all .15s ease;
@@ -302,17 +314,30 @@
                     {{-- Forma de imagen --}}
                     <div>
                         <p class="text-xs font-medium text-gray-700 mb-2">Forma de la imagen</p>
+                        @php
+                            $shapeGradient = 'background:linear-gradient(135deg,#a78bfa 0%,#f0abfc 50%,#fb7185 100%);';
+                            $formaOpts = [
+                                'ninguna'  => ['Sin',      'border-radius:12px;'],
+                                'cuadrado' => ['Cuadro',   'border-radius:8px;'],
+                                'circulo'  => ['Círculo',  'border-radius:9999px;'],
+                                'corazon'  => ['Corazón',  'clip-path:polygon(50% 95%, 5% 55%, 5% 25%, 22% 8%, 38% 8%, 50% 22%, 62% 8%, 78% 8%, 95% 25%, 95% 55%);'],
+                                'estrella' => ['Estrella', 'clip-path:polygon(50% 2%, 61% 35%, 96% 35%, 68% 57%, 79% 92%, 50% 70%, 21% 92%, 32% 57%, 4% 35%, 39% 35%);'],
+                                'hexagono' => ['Hex',      'clip-path:polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);'],
+                                'diamante' => ['Diamante', 'clip-path:polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);'],
+                            ];
+                        @endphp
                         <div class="grid grid-cols-4 sm:grid-cols-7 gap-2">
-                            @foreach(['ninguna' => 'Sin','cuadrado' => 'Cuadro','circulo' => 'Círculo','corazon' => 'Corazón','estrella' => 'Estrella','hexagono' => 'Hex','diamante' => 'Diamante'] as $val => $label)
-                                <label class="opt-card rounded-xl p-2 text-center bg-white"
+                            @foreach($formaOpts as $val => [$label, $shapeStyle])
+                                <label class="opt-card rounded-xl p-2 text-center"
                                        :class="imagenForma === '{{ $val }}' ? 'selected' : ''">
+                                    <span class="check-pin">✓</span>
                                     <input type="radio"
                                            name="imagen_forma"
                                            value="{{ $val }}"
                                            x-model="imagenForma"
                                            class="sr-only">
-                                    <div class="mx-auto w-14 h-14 rounded-xl bg-violet-50 border border-violet-200 flex items-center justify-center">
-                                        <div class="w-10 h-10 bg-gradient-to-br from-violet-300 to-pink-300 shape-{{ $val }}"></div>
+                                    <div class="mx-auto w-12 h-12 flex items-center justify-center">
+                                        <div style="width:44px;height:44px;{{ $shapeGradient }}{{ $shapeStyle }}"></div>
                                     </div>
                                     <div class="text-xs mt-1 font-medium text-gray-700">{{ $label }}</div>
                                 </label>
@@ -324,19 +349,31 @@
                     {{-- Marco --}}
                     <div>
                         <p class="text-xs font-medium text-gray-700 mb-2">Marco</p>
-                        <div class="grid grid-cols-4 sm:grid-cols-7 gap-2">
-                            @foreach(['ninguno' => 'Sin','morado' => 'Morado','dorado' => 'Dorado','rosa' => 'Rosa','verde' => 'Verde','sombra' => 'Sombra','blanco' => 'Blanco'] as $val => $label)
-                                <label class="opt-card rounded-xl p-2 text-center bg-white"
+                        @php
+                            $marcoOpts = [
+                                'ninguno' => ['Sin',     'box-shadow:inset 0 0 0 1px #e5e7eb;'],
+                                'morado'  => ['Morado',  'box-shadow:0 0 0 4px #8b5cf6, 0 6px 14px -6px rgba(139,92,246,.55);'],
+                                'dorado'  => ['Dorado',  'box-shadow:0 0 0 4px #f59e0b, 0 6px 14px -6px rgba(245,158,11,.55);'],
+                                'rosa'    => ['Rosa',    'box-shadow:0 0 0 4px #ec4899, 0 6px 14px -6px rgba(236,72,153,.55);'],
+                                'verde'   => ['Verde',   'box-shadow:0 0 0 4px #10b981, 0 6px 14px -6px rgba(16,185,129,.55);'],
+                                'sombra'  => ['Sombra',  'box-shadow:0 12px 24px -6px rgba(0,0,0,.55);'],
+                                'blanco'  => ['Blanco',  'box-shadow:0 0 0 5px #fff, 0 0 0 6px #e5e7eb, 0 8px 18px -8px rgba(0,0,0,.3);'],
+                            ];
+                        @endphp
+                        <div class="grid grid-cols-4 sm:grid-cols-7 gap-3">
+                            @foreach($marcoOpts as $val => [$label, $marcoStyle])
+                                <label class="opt-card rounded-xl p-2 pt-3 text-center"
                                        :class="imagenMarco === '{{ $val }}' ? 'selected' : ''">
+                                    <span class="check-pin">✓</span>
                                     <input type="radio"
                                            name="imagen_marco"
                                            value="{{ $val }}"
                                            x-model="imagenMarco"
                                            class="sr-only">
-                                    <div class="mx-auto w-14 h-14 rounded-xl bg-gray-100 border border-gray-200 flex items-center justify-center">
-                                        <div class="w-10 h-10 rounded-lg bg-white border border-gray-200 marco-{{ $val }}"></div>
+                                    <div class="mx-auto w-14 h-14 flex items-center justify-center">
+                                        <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#fde68a,#fbcfe8);{{ $marcoStyle }}"></div>
                                     </div>
-                                    <div class="text-xs mt-1 font-medium text-gray-700">{{ $label }}</div>
+                                    <div class="text-xs mt-2 font-medium text-gray-700">{{ $label }}</div>
                                 </label>
                             @endforeach
                         </div>

@@ -44,7 +44,7 @@
                 <div class="mb-8">
                     <div style="{{ $estiloMarco }}">
                         <div class="w-full max-w-xs h-48 sm:h-56 overflow-hidden rounded-2xl" style="{{ $estiloForma ?: 'border-radius:1rem;' }}">
-                            <img src="{{ $imagenUrl }}" alt="Foto" class="w-full h-full object-cover">
+                            <img src="{{ $imagenUrl }}" alt="Foto" class="w-full h-full object-contain bg-white">
                         </div>
                     </div>
                 </div>

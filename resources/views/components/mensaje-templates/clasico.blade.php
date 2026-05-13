@@ -45,7 +45,7 @@
             <div class="flex justify-center mb-8">
                 <div style="{{ $estiloMarco }}">
                     <div class="w-40 h-40 sm:w-48 sm:h-48 overflow-hidden" style="{{ $estiloForma }}">
-                        <img src="{{ $imagenUrl }}" alt="Foto" class="w-full h-full object-cover">
+                        <img src="{{ $imagenUrl }}" alt="Foto" class="w-full h-full object-contain bg-white">
                     </div>
                 </div>
             </div>

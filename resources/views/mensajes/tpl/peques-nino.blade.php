@@ -155,7 +155,7 @@
                     <div class="flex justify-center mb-6">
                         <img src="{{ asset('storage/' . $mensaje->imagen_path) }}"
                              alt="Foto de {{ $mensaje->destinatario }}"
-                             class="w-44 h-44 object-cover border-4 border-slate-900"
+                             class="w-44 h-44 object-contain bg-white border-4 border-slate-900"
                              style="{{ $eForma }} {{ $eMarco }}">
                     </div>
                 @endif

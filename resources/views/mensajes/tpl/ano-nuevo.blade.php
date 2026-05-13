@@ -119,7 +119,7 @@
         @keyframes glow-pulse { 0%,100%{filter:drop-shadow(0 0 8px #FFD700);} 50%{filter:drop-shadow(0 0 24px #FFD700);} }
         .glow { animation: glow-pulse 2s ease-in-out infinite; }
 
-        .img-shape { width: 180px; height: 180px; object-fit: cover; }
+        .img-shape { width: 180px; height: 180px; object-fit: contain; background:#fff; }
 
         @keyframes clink {
             0%,100% { transform: rotate(0); }

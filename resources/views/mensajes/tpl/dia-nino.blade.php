@@ -86,7 +86,7 @@
         @keyframes wobble { 0%,100%{transform:rotate(-2deg);} 50%{transform:rotate(2deg);} }
         .wobble { animation: wobble 3s ease-in-out infinite; }
 
-        .img-shape { width:170px; height:170px; object-fit:cover; }
+        .img-shape { width:170px; height:170px; object-fit:contain; background:#fff; }
     </style>
 </head>
 <body class="min-h-screen overflow-x-hidden">

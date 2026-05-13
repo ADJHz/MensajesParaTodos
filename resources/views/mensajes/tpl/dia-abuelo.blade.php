@@ -90,7 +90,7 @@
         @keyframes fade-up { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
         .fade-up { animation: fade-up 1s ease-out both; }
 
-        .img-vintage { width: 200px; height: 200px; object-fit: cover; border-radius: 50%; }
+        .img-vintage { width: 200px; height: 200px; object-fit: contain; background:#fff; border-radius: 50%; }
 
         /* Línea decorativa */
         .ornament-line {

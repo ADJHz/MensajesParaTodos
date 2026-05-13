@@ -115,7 +115,7 @@
         }
 
         /* ── Imagen forma/marco ── */
-        .img-shape{ width:140px; height:140px; object-fit:cover; }
+        .img-shape{ width:140px; height:140px; object-fit:contain; background:#fff; }
         .shape-circulo  { border-radius:50%; }
         .shape-cuadrado { border-radius:8px; }
         .shape-corazon  { clip-path: path('M70 130 C 30 100, 0 70, 0 40 C 0 15, 20 0, 35 0 C 55 0, 65 15, 70 25 C 75 15, 85 0, 105 0 C 120 0, 140 15, 140 40 C 140 70, 110 100, 70 130 Z'); border-radius:0; }

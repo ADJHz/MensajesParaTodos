@@ -146,7 +146,7 @@
                 <figure class="flex justify-center mb-6">
                     <img src="{{ asset('storage/'.$mensaje->imagen_path) }}"
                          alt="Imagen para {{ $mensaje->destinatario }}"
-                         class="w-44 h-44 sm:w-52 sm:h-52 object-cover img-{{ $mensaje->imagen_forma ?? 'cuadrado' }} marco-{{ $mensaje->imagen_marco ?? 'moderno' }}"
+                             class="w-44 h-44 sm:w-52 sm:h-52 object-contain bg-white img-{{ $mensaje->imagen_forma ?? 'cuadrado' }} marco-{{ $mensaje->imagen_marco ?? 'moderno' }}"
                          style="image-rendering:pixelated;">
                 </figure>
             @endif

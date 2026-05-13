@@ -49,7 +49,7 @@
                 <div class="flex justify-center -mt-12 mb-6">
                     <div style="{{ $estiloMarco }}" class="ring-4 ring-white">
                         <div class="w-24 h-24 overflow-hidden" style="{{ $estiloForma ?: 'border-radius:50%;' }}">
-                            <img src="{{ $imagenUrl }}" alt="Foto" class="w-full h-full object-cover">
+                            <img src="{{ $imagenUrl }}" alt="Foto" class="w-full h-full object-contain bg-white">
                         </div>
                     </div>
                 </div>

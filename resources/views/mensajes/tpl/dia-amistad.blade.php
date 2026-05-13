@@ -85,7 +85,7 @@
         @keyframes star-twinkle { 0%,100%{opacity:.4;} 50%{opacity:1;} }
         .twinkle { animation: star-twinkle 2s ease-in-out infinite; }
 
-        .img-poly { width: 100%; max-width: 280px; aspect-ratio: 1; object-fit: cover; }
+        .img-poly { width: 100%; max-width: 280px; aspect-ratio: 1; object-fit: contain; background:#fff; }
     </style>
 </head>
 <body class="min-h-screen overflow-x-hidden relative">

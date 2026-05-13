@@ -291,7 +291,7 @@
                              class="p-3 rounded-xl bg-red-50 border border-red-200 text-sm text-red-700 flex items-center justify-between">
                             <span>Se eliminará la imagen actual al guardar.</span>
                             <button type="button"
-                                    @click="eliminarImagen = false; imagenPreviewURL = @json($mensaje->imagen_path ? asset('storage/'.$mensaje->imagen_path) : null);"
+                                    @click="deshacerEliminar()"
                                     class="font-semibold underline">Deshacer</button>
                         </div>
                     @endif
@@ -518,6 +518,7 @@
             imagenForma:   @json($mensaje->imagen_forma ?? 'circulo'),
             imagenMarco:   @json($mensaje->imagen_marco ?? 'ninguno'),
             eliminarImagen: false,
+            imagenOriginalURL: @json($mensaje->imagen_path ? asset('storage/'.$mensaje->imagen_path) : null),
             imagenPreviewURL: @json($mensaje->imagen_path ? asset('storage/'.$mensaje->imagen_path) : null),
             PREVIEW_CONFIGS: @json($previewConfigs),
             PREVIEW_ARTE:    @json($previewArte),
@@ -543,6 +544,10 @@
                 this.imagenPreviewURL = null;
                 const input = document.getElementById('imagen');
                 if (input) input.value = '';
+            },
+            deshacerEliminar() {
+                this.eliminarImagen = false;
+                this.imagenPreviewURL = this.imagenOriginalURL;
             },
             trunc(s, n) {
                 return s && s.length > n ? s.slice(0, n - 1) + '…' : (s || '');

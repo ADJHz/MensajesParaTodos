@@ -49,6 +49,7 @@ class PagoController extends Controller
 
         $stripe = new StripeClient(config('services.stripe.secret'));
         $montoCentavosMxn = $this->montoMxnCentavos();
+        $successUrl = route('pago.exito', ['code' => $mensaje->code]) . '?session_id={CHECKOUT_SESSION_ID}';
 
         $session = $stripe->checkout->sessions->create([
             'payment_method_types' => ['card'],
@@ -65,7 +66,7 @@ class PagoController extends Controller
                 ],
                 'quantity' => 1,
             ]],
-            'success_url' => route('pago.exito', ['code' => $mensaje->code, 'session_id' => '{CHECKOUT_SESSION_ID}']),
+            'success_url' => $successUrl,
             'cancel_url'  => route('pago.checkout', $mensaje->code),
             'metadata'    => ['mensaje_code' => $mensaje->code],
         ]);
@@ -86,13 +87,33 @@ class PagoController extends Controller
 
     public function exito(Request $request)
     {
+        $sessionId = (string) $request->query('session_id', '');
+        if ($sessionId === '' || str_contains($sessionId, '{CHECKOUT_SESSION_ID}')) {
+            Log::warning('Pago exito con session_id inválido o placeholder sin sustituir', [
+                'code' => $request->code,
+                'session_id' => $sessionId,
+            ]);
+
+            return redirect()->route('dashboard')->with('error', 'No se pudo validar el pago. Intenta de nuevo desde el checkout.');
+        }
+
         $mensaje = MensajePlataforma::where('code', $request->code)
             ->where('user_id', Auth::id())
             ->firstOrFail();
 
-        // Verificar con Stripe
-        $stripe  = new StripeClient(config('services.stripe.secret'));
-        $session = $stripe->checkout->sessions->retrieve($request->session_id);
+        try {
+            // Verificar con Stripe
+            $stripe  = new StripeClient(config('services.stripe.secret'));
+            $session = $stripe->checkout->sessions->retrieve($sessionId);
+        } catch (\Throwable $e) {
+            Log::error('Error validando sesión de Stripe en exito()', [
+                'code' => $mensaje->code,
+                'session_id' => $sessionId,
+                'error' => $e->getMessage(),
+            ]);
+
+            return redirect()->route('dashboard')->with('error', 'No se pudo validar el pago con Stripe.');
+        }
 
         if ($session->payment_status === 'paid') {
             $mensaje->update(['estado' => 'pagado']);

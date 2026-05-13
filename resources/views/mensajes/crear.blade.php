@@ -373,7 +373,7 @@
                     <div :style="getMarcoStyle()" class="transition-all duration-300">
                       <div class="w-20 h-20 sm:w-24 sm:h-24 overflow-hidden transition-all duration-300" :style="getFormaStyle()">
                         <template x-if="imagenPreview">
-                          <img :src="imagenPreview" class="w-full h-full object-cover" alt="">
+                          <img :src="imagenPreview" class="w-full h-full object-contain bg-white" alt="">
                         </template>
                         <template x-if="!imagenPreview">
                           <div class="w-full h-full bg-violet-100 flex items-center justify-center text-3xl rounded-lg">🖼️</div>
@@ -915,7 +915,7 @@ function crearMensaje() {
             const ef = this.getFormaStyleRaw();
             const em = this.getMarcoStyleRaw();
             const imgHtml = this.imagenPreview
-                ? `<div style="display:flex;justify-content:center;margin:12px 0;"><div style="${em}"><div style="width:80px;height:80px;overflow:hidden;${ef}"><img src="${this.imagenPreview}" style="width:100%;height:100%;object-fit:cover;" alt=""></div></div></div>`
+              ? `<div style="display:flex;justify-content:center;margin:12px 0;"><div style="${em}"><div style="width:80px;height:80px;overflow:hidden;${ef}"><img src="${this.imagenPreview}" style="width:100%;height:100%;object-fit:contain;background:#fff;" alt=""></div></div></div>`
                 : '';
 
             const t = this.templateSeleccionado;
@@ -1083,7 +1083,15 @@ function crearMensaje() {
         },
 
         getFormaStyleRaw() {
-            const map = { 'ninguna':'','cuadrado':'border-radius:16px;','circulo':'border-radius:50%;','corazon':'clip-path:url(#cp-heart);','estrella':'clip-path:url(#cp-star);','hexagono':'clip-path:url(#cp-hexagon);','diamante':'clip-path:url(#cp-diamond);' };
+          const map = {
+            'ninguna':'',
+            'cuadrado':'border-radius:16px;',
+            'circulo':'border-radius:50%;',
+            'corazon':'clip-path:path("M50,90 C20,65 0,45 0,25 C0,10 12,0 25,0 C35,0 45,7 50,18 C55,7 65,0 75,0 C88,0 100,10 100,25 C100,45 80,65 50,90 Z");',
+            'estrella':'clip-path:polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);',
+            'hexagono':'clip-path:polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);',
+            'diamante':'clip-path:polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);'
+          };
             return map[this.imagenForma] || '';
         },
         escapeHTML(s) {

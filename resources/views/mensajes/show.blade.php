@@ -121,7 +121,7 @@ $borderSoft = $isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)';
                         <div style="width:clamp(140px,35vw,200px);height:clamp(140px,35vw,200px);overflow:hidden;{{ $estiloForma }}">
                             <img src="{{ Storage::url($mensaje->imagen_path) }}"
                                  alt="Foto especial"
-                                 style="width:100%;height:100%;object-fit:cover;"
+                                   style="width:100%;height:100%;object-fit:contain;background:#fff;"
                                  loading="lazy">
                         </div>
                     </div>

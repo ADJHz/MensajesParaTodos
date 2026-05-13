@@ -264,7 +264,7 @@
                              x-show="!eliminarImagen && imagenPreviewURL">
                             <img :src="imagenPreviewURL"
                                  alt="Imagen actual"
-                                 class="w-20 h-20 object-cover rounded-lg">
+                                 class="w-20 h-20 object-contain rounded-lg bg-white">
                             <div class="flex-1 min-w-0">
                                 <p class="text-sm font-medium text-gray-800">Imagen actual</p>
                                 <p class="text-xs text-gray-500">Sube otra abajo para reemplazarla, o quítala.</p>
@@ -311,8 +311,10 @@
                                            value="{{ $val }}"
                                            x-model="imagenForma"
                                            class="sr-only">
-                                    <div class="mx-auto w-10 h-10 bg-gradient-to-br from-violet-300 to-pink-300 shape-{{ $val }}"></div>
-                                    <div class="text-[11px] mt-1 font-medium text-gray-700">{{ $label }}</div>
+                                    <div class="mx-auto w-14 h-14 rounded-xl bg-violet-50 border border-violet-200 flex items-center justify-center">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-violet-300 to-pink-300 shape-{{ $val }}"></div>
+                                    </div>
+                                    <div class="text-xs mt-1 font-medium text-gray-700">{{ $label }}</div>
                                 </label>
                             @endforeach
                         </div>
@@ -331,8 +333,10 @@
                                            value="{{ $val }}"
                                            x-model="imagenMarco"
                                            class="sr-only">
-                                    <div class="mx-auto w-10 h-10 rounded-lg bg-gradient-to-br from-gray-200 to-gray-300 marco-{{ $val }}"></div>
-                                    <div class="text-[11px] mt-1 font-medium text-gray-700">{{ $label }}</div>
+                                    <div class="mx-auto w-14 h-14 rounded-xl bg-gray-100 border border-gray-200 flex items-center justify-center">
+                                        <div class="w-10 h-10 rounded-lg bg-white border border-gray-200 marco-{{ $val }}"></div>
+                                    </div>
+                                    <div class="text-xs mt-1 font-medium text-gray-700">{{ $label }}</div>
                                 </label>
                             @endforeach
                         </div>
@@ -435,7 +439,7 @@
                                     <div class="flex justify-center">
                                         <div :class="`shape-${imagenForma} marco-${imagenMarco}`"
                                              class="w-24 h-24 overflow-hidden">
-                                            <img :src="imagenPreviewURL" class="w-full h-full object-cover" alt="">
+                                            <img :src="imagenPreviewURL" class="w-full h-full object-contain bg-white" alt="">
                                         </div>
                                     </div>
                                 </template>

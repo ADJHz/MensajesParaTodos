@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\TemplateHelper;
 use App\Models\MensajePlataforma;
 use App\Models\Ocasion;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -64,7 +65,7 @@ class MensajeController extends Controller
         // Subir imagen si existe
         $imagenPath = null;
         if ($request->hasFile('imagen') && $request->file('imagen')->isValid()) {
-            $imagenPath = $request->file('imagen')->store('mensajes', 'public');
+            $imagenPath = $this->guardarImagenMensajeSinRecorte($request->file('imagen'));
         }
 
         // Subir personaje custom si existe
@@ -296,13 +297,102 @@ class MensajeController extends Controller
             if ($mensaje->imagen_path) {
                 Storage::disk('public')->delete($mensaje->imagen_path);
             }
-            $datos['imagen_path'] = $request->file('imagen')->store('mensajes', 'public');
+            $datos['imagen_path'] = $this->guardarImagenMensajeSinRecorte($request->file('imagen'));
         }
 
         $mensaje->update($datos);
 
         return redirect()->route('mensajes.mios')
             ->with('success', '✨ Mensaje actualizado. ¡Tus cambios ya están listos para compartir!');
+    }
+
+    private function guardarImagenMensajeSinRecorte(UploadedFile $file): string
+    {
+        $fallbackPath = $file->store('mensajes', 'public');
+        $tmpPath = $file->getRealPath();
+        if (!$tmpPath || !extension_loaded('gd')) {
+            return $fallbackPath;
+        }
+
+        $info = @getimagesize($tmpPath);
+        if (!$info || !isset($info[2])) {
+            return $fallbackPath;
+        }
+
+        $src = null;
+        switch ((int) $info[2]) {
+            case IMAGETYPE_JPEG:
+                $src = @imagecreatefromjpeg($tmpPath);
+                break;
+            case IMAGETYPE_PNG:
+                $src = @imagecreatefrompng($tmpPath);
+                break;
+            case IMAGETYPE_GIF:
+                $src = @imagecreatefromgif($tmpPath);
+                break;
+            case IMAGETYPE_WEBP:
+                if (function_exists('imagecreatefromwebp')) {
+                    $src = @imagecreatefromwebp($tmpPath);
+                }
+                break;
+        }
+
+        if (!$src) {
+            return $fallbackPath;
+        }
+
+        try {
+            $srcW = imagesx($src);
+            $srcH = imagesy($src);
+            if ($srcW <= 0 || $srcH <= 0) {
+                imagedestroy($src);
+                return $fallbackPath;
+            }
+
+            $maxSide = 1600;
+            $scale = min(1, $maxSide / max($srcW, $srcH));
+            $dstW = max(1, (int) round($srcW * $scale));
+            $dstH = max(1, (int) round($srcH * $scale));
+            $canvasSize = max($dstW, $dstH);
+
+            $canvas = imagecreatetruecolor($canvasSize, $canvasSize);
+            if (!$canvas) {
+                imagedestroy($src);
+                return $fallbackPath;
+            }
+
+            // Fondo blanco para conservar imagen completa sin recortes en contenedores cuadrados.
+            $bg = imagecolorallocate($canvas, 255, 255, 255);
+            imagefill($canvas, 0, 0, $bg);
+            imagealphablending($canvas, true);
+
+            $dstX = (int) floor(($canvasSize - $dstW) / 2);
+            $dstY = (int) floor(($canvasSize - $dstH) / 2);
+            imagecopyresampled($canvas, $src, $dstX, $dstY, 0, 0, $dstW, $dstH, $srcW, $srcH);
+
+            $relativePath = 'mensajes/' . (string) Str::uuid() . '.jpg';
+            $absolutePath = Storage::disk('public')->path($relativePath);
+            $dir = dirname($absolutePath);
+            if (!is_dir($dir)) {
+                mkdir($dir, 0755, true);
+            }
+
+            $ok = imagejpeg($canvas, $absolutePath, 88);
+            imagedestroy($canvas);
+            imagedestroy($src);
+
+            if (!$ok) {
+                return $fallbackPath;
+            }
+
+            Storage::disk('public')->delete($fallbackPath);
+            return $relativePath;
+        } catch (\Throwable $e) {
+            if (is_resource($src) || (is_object($src) && get_class($src) === 'GdImage')) {
+                imagedestroy($src);
+            }
+            return $fallbackPath;
+        }
     }
 
     /**

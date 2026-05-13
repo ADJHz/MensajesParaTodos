@@ -29,6 +29,7 @@
     "animejs": "^4.4.1",
     "aos": "^2.3.4",
     "canvas-confetti": "^1.9.4",
+    "emoji-picker-element": "^1.29.1",
     "flowbite": "^4.0.1",
     "msedge-tts": "^2.0.5"
   }

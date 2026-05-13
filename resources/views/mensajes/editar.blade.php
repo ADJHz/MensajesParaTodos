@@ -53,6 +53,14 @@
         border-color: #8b5cf6;
         box-shadow: 0 0 0 4px rgba(139,92,246,.18);
     }
+    .app-emoji-picker {
+        width: 100%;
+        height: 360px;
+        --border-size: 0;
+        --border-radius: 1rem;
+        --indicator-color: #8b5cf6;
+        --input-border-radius: 0.75rem;
+    }
 </style>
 @endpush
 
@@ -163,6 +171,39 @@
                     <label for="mensaje" class="block text-sm font-semibold text-gray-800 mb-1">
                         Tu mensaje <span class="text-red-500">*</span>
                     </label>
+                    <div class="mb-2 flex flex-wrap items-center gap-2">
+                        <div class="relative">
+                            <button type="button"
+                                    @click="emojiPanelAbierto = !emojiPanelAbierto; stickerPanelAbierto = false"
+                                    class="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-violet-200 bg-violet-50 text-violet-700 text-sm font-semibold hover:bg-violet-100 transition">
+                                <span>😊</span>
+                                <span>Emojis</span>
+                            </button>
+                            <div x-show="emojiPanelAbierto" x-cloak @click.outside="emojiPanelAbierto = false"
+                                 class="absolute left-0 top-12 z-20 w-[320px] max-w-[85vw] rounded-2xl border border-violet-100 bg-white shadow-2xl p-2">
+                                <emoji-picker x-ref="editarEmojiPicker" class="light app-emoji-picker" locale="es"></emoji-picker>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <button type="button"
+                                    @click="stickerPanelAbierto = !stickerPanelAbierto; emojiPanelAbierto = false"
+                                    class="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-pink-200 bg-pink-50 text-pink-700 text-sm font-semibold hover:bg-pink-100 transition">
+                                <span>🎀</span>
+                                <span>Stickers</span>
+                            </button>
+                            <div x-show="stickerPanelAbierto" x-cloak @click.outside="stickerPanelAbierto = false"
+                                 class="absolute left-0 top-12 z-20 w-72 max-w-[85vw] rounded-2xl border border-pink-100 bg-white shadow-2xl p-3">
+                                <p class="text-xs font-semibold text-gray-500 mb-2">Agrégalos al mensaje</p>
+                                <div class="grid grid-cols-4 gap-2">
+                                    @foreach(['💖','✨','🌸','🎀','🦋','🥰','💐','🌷','💘','⭐','💕','🤍'] as $sticker)
+                                        <button type="button"
+                                                @click="insertarEnMensaje(' {{ $sticker }} ')"
+                                                class="h-11 rounded-xl border border-pink-100 bg-pink-50 hover:bg-pink-100 text-2xl transition">{{ $sticker }}</button>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <textarea name="mensaje"
                               id="mensaje"
                               required
@@ -171,7 +212,7 @@
                               x-model="mensaje"
                               class="block w-full rounded-lg border-gray-300 focus:border-violet-500 focus:ring-violet-500 text-base px-4 py-3 leading-relaxed"
                               placeholder="Escribe desde el corazón…">{{ old('mensaje', strip_tags($mensaje->mensaje)) }}</textarea>
-                    <p class="text-xs text-gray-500 mt-1">Soportamos negrita, cursiva y emoji. ✨</p>
+                    <p class="text-xs text-gray-500 mt-1">Ahora también puedes insertar emojis y stickers decorativos. ✨</p>
                     @error('mensaje')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
                 </div>
 
@@ -522,10 +563,16 @@
             imagenForma:   @json($mensaje->imagen_forma ?? 'circulo'),
             imagenMarco:   @json($mensaje->imagen_marco ?? 'ninguno'),
             eliminarImagen: false,
+            emojiPanelAbierto: false,
+            stickerPanelAbierto: false,
             imagenOriginalURL: @json($mensaje->imagen_path ? asset('storage/'.$mensaje->imagen_path) : null),
             imagenPreviewURL: @json($mensaje->imagen_path ? asset('storage/'.$mensaje->imagen_path) : null),
             PREVIEW_CONFIGS: @json($previewConfigs),
             PREVIEW_ARTE:    @json($previewArte),
+
+            init() {
+                this.$nextTick(() => this.inicializarEmojiPicker());
+            },
 
             config() {
                 return this.PREVIEW_CONFIGS[this.template] || this.PREVIEW_CONFIGS['clasico'] || { wrap:'', card:'', bar:'', tc:'#111', ac:'#8b5cf6', bg:'#fff', tx:'#333', fc:'#555' };
@@ -552,6 +599,33 @@
             deshacerEliminar() {
                 this.eliminarImagen = false;
                 this.imagenPreviewURL = this.imagenOriginalURL;
+            },
+            inicializarEmojiPicker() {
+                const picker = this.$refs.editarEmojiPicker;
+                if (!picker || picker.dataset.bound === '1') return;
+                picker.dataset.bound = '1';
+                picker.addEventListener('emoji-click', (event) => {
+                    this.insertarEnMensaje(event.detail?.unicode || '');
+                    this.emojiPanelAbierto = false;
+                });
+            },
+            insertarEnMensaje(texto) {
+                if (!texto) return;
+                const el = document.getElementById('mensaje');
+                if (!el) {
+                    this.mensaje = (this.mensaje || '') + texto;
+                    return;
+                }
+                const inicio = el.selectionStart ?? (this.mensaje || '').length;
+                const fin = el.selectionEnd ?? inicio;
+                const actual = this.mensaje || '';
+                this.mensaje = actual.slice(0, inicio) + texto + actual.slice(fin);
+                this.stickerPanelAbierto = false;
+                this.$nextTick(() => {
+                    el.focus();
+                    const cursor = inicio + texto.length;
+                    el.setSelectionRange(cursor, cursor);
+                });
             },
             trunc(s, n) {
                 return s && s.length > n ? s.slice(0, n - 1) + '…' : (s || '');

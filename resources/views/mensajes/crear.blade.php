@@ -354,10 +354,38 @@
                                 class="min-h-10 min-w-10 flex items-center justify-center rounded-lg text-gray-500 transition hover:bg-red-100 hover:text-red-500">
                           <svg viewBox="0 0 20 20" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 17h6m1-8l4-4M5 15l10-10M8 17l9-9"/></svg>
                         </button>
+                        <div class="w-px h-5 bg-gray-200 mx-0.5"></div>
+                        <div class="relative">
+                          <button type="button"
+                                  @mousedown.prevent="guardarSeleccionEditor(); emojiPanelAbierto = !emojiPanelAbierto; stickerPanelAbierto = false"
+                                  title="Agregar emoji"
+                                  class="min-h-10 min-w-10 flex items-center justify-center rounded-lg text-gray-700 transition bg-white hover:bg-violet-100">😊</button>
+                          <div x-show="emojiPanelAbierto" x-cloak @click.outside="emojiPanelAbierto = false"
+                               class="absolute top-12 right-0 z-20 w-[320px] max-w-[85vw] rounded-2xl border border-violet-100 bg-white shadow-2xl p-2">
+                            <emoji-picker x-ref="crearEmojiPicker" class="light app-emoji-picker" locale="es"></emoji-picker>
+                          </div>
+                        </div>
+                        <div class="relative">
+                          <button type="button"
+                                  @mousedown.prevent="guardarSeleccionEditor(); stickerPanelAbierto = !stickerPanelAbierto; emojiPanelAbierto = false"
+                                  title="Agregar sticker"
+                                  class="min-h-10 px-3 flex items-center justify-center rounded-lg text-gray-700 transition bg-white hover:bg-violet-100 text-sm font-semibold">Stickers</button>
+                          <div x-show="stickerPanelAbierto" x-cloak @click.outside="stickerPanelAbierto = false"
+                               class="absolute top-12 right-0 z-20 w-72 max-w-[85vw] rounded-2xl border border-pink-100 bg-white shadow-2xl p-3">
+                            <p class="text-xs font-semibold text-gray-500 mb-2">Toca uno para insertarlo</p>
+                            <div class="grid grid-cols-4 gap-2">
+                              @foreach(['💖','✨','🌸','🎀','🦋','🥰','💐','🌷','💘','⭐','💕','🤍'] as $sticker)
+                                <button type="button"
+                                        @click="insertarSticker('{{ $sticker }}')"
+                                        class="h-11 rounded-xl border border-pink-100 bg-pink-50 hover:bg-pink-100 text-2xl transition">{{ $sticker }}</button>
+                              @endforeach
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div id="mensaje-editor" contenteditable="true"
-                         @input="sincronizarMensaje()" @keyup="actualizarActivos()" @mouseup="actualizarActivos()"
+                         @input="sincronizarMensaje()" @keyup="actualizarActivos(); guardarSeleccionEditor()" @mouseup="actualizarActivos(); guardarSeleccionEditor()" @blur="guardarSeleccionEditor()"
                          @keydown.ctrl.b.prevent="formatear('bold')" @keydown.ctrl.i.prevent="formatear('italic')" @keydown.ctrl.u.prevent="formatear('underline')"
                          class="min-h-32 sm:min-h-40 w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-t-0 border-gray-200 rounded-b-xl focus:outline-none focus:ring-2 focus:ring-violet-400 text-gray-700 leading-relaxed bg-white"
                          style="font-family:'Nunito',sans-serif;font-size:1rem;"
@@ -597,6 +625,14 @@
 
 <style>
   #mensaje-editor:empty::before { content: attr(data-placeholder); color: #9ca3af; pointer-events: none; }
+  .app-emoji-picker {
+    width: 100%;
+    height: 360px;
+    --border-size: 0;
+    --border-radius: 1rem;
+    --indicator-color: #8b5cf6;
+    --input-border-radius: 0.75rem;
+  }
   @keyframes preview-vinyl-spin {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
@@ -628,6 +664,9 @@ function crearMensaje() {
         colorTexto: '#000000',
         colorResaltado: '#FFFF00',
         activos: { bold: false, italic: false, underline: false, strikeThrough: false },
+        emojiPanelAbierto: false,
+        stickerPanelAbierto: false,
+        rangoMensaje: null,
         // Estado del asistente IA
         aiPanelAbierto: false,
         aiTono: 'cálido y sincero',
@@ -679,8 +718,11 @@ function crearMensaje() {
                     editor.innerHTML = this.mensajeHTML;
                     this.mensajeCharCount = editor.innerText.replace(/\n/g, '').length;
                   }
+                  this.inicializarEmojiPicker();
                   this.emitirPreview();
                 });
+            } else {
+                this.$nextTick(() => this.inicializarEmojiPicker());
             }
         },
 
@@ -766,6 +808,81 @@ function crearMensaje() {
             if (el) el.focus();
             this.sincronizarMensaje();
             this.actualizarActivos();
+          this.guardarSeleccionEditor();
+        },
+
+        inicializarEmojiPicker() {
+          const picker = this.$refs.crearEmojiPicker;
+          if (!picker || picker.dataset.bound === '1') return;
+          picker.dataset.bound = '1';
+          picker.addEventListener('emoji-click', (event) => {
+            this.insertarEmoji(event.detail?.unicode || '');
+          });
+        },
+
+        guardarSeleccionEditor() {
+          const sel = window.getSelection();
+          const editor = document.getElementById('mensaje-editor');
+          if (!sel || !sel.rangeCount || !editor) return;
+          const range = sel.getRangeAt(0);
+          if (!editor.contains(range.commonAncestorContainer)) return;
+          this.rangoMensaje = range.cloneRange();
+        },
+
+        restaurarSeleccionEditor() {
+          const sel = window.getSelection();
+          const editor = document.getElementById('mensaje-editor');
+          if (!sel || !editor) return;
+
+          if (this.rangoMensaje) {
+            sel.removeAllRanges();
+            sel.addRange(this.rangoMensaje);
+            return;
+          }
+
+          const range = document.createRange();
+          range.selectNodeContents(editor);
+          range.collapse(false);
+          sel.removeAllRanges();
+          sel.addRange(range);
+          this.rangoMensaje = range.cloneRange();
+        },
+
+        insertarEmoji(emoji) {
+          if (!emoji) return;
+          this.insertarTextoEnEditor(emoji);
+          this.emojiPanelAbierto = false;
+        },
+
+        insertarSticker(sticker) {
+          if (!sticker) return;
+          this.insertarTextoEnEditor(` ${sticker} `);
+          this.stickerPanelAbierto = false;
+        },
+
+        insertarTextoEnEditor(texto) {
+          const editor = document.getElementById('mensaje-editor');
+          if (!editor) return;
+
+          editor.focus();
+          this.restaurarSeleccionEditor();
+
+          const sel = window.getSelection();
+          if (sel && sel.rangeCount) {
+            const range = sel.getRangeAt(0);
+            range.deleteContents();
+            const node = document.createTextNode(texto);
+            range.insertNode(node);
+            range.setStartAfter(node);
+            range.collapse(true);
+            sel.removeAllRanges();
+            sel.addRange(range);
+            this.rangoMensaje = range.cloneRange();
+          } else {
+            document.execCommand('insertText', false, texto);
+          }
+
+          this.sincronizarMensaje();
         },
 
         // ─── Asistente IA (OpenRouter) ──────────────────────────────────

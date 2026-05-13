@@ -1,5 +1,6 @@
 import Alpine from 'alpinejs';
 import AOS from 'aos';
+import 'emoji-picker-element';
 import 'aos/dist/aos.css';
 import { initFlowbite } from 'flowbite';
 import 'animate.css';

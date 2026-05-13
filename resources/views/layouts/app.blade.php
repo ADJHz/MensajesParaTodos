@@ -61,40 +61,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
 
     {{-- JSON-LD: WebSite + Organization (mejora rich results) --}}
-    <script type="application/ld+json">
-    @json([
-        '@context' => 'https://schema.org',
-        '@graph' => [
-            [
-                '@type' => 'Organization',
-                '@id' => url('/') . '#organization',
-                'name' => $siteName,
-                'url' => url('/'),
-                'logo' => url('/favicon.svg'),
-                'description' => 'Plataforma para crear mensajes personalizados con música, animaciones y un link único.',
-                'sameAs' => [],
+    @php
+        $jsonLd = [
+            '@context' => 'https://schema.org',
+            '@graph' => [
+                [
+                    '@type' => 'Organization',
+                    '@id' => url('/') . '#organization',
+                    'name' => $siteName,
+                    'url' => url('/'),
+                    'logo' => url('/favicon.svg'),
+                    'description' => 'Plataforma para crear mensajes personalizados con música, animaciones y un link único.',
+                ],
+                [
+                    '@type' => 'WebSite',
+                    '@id' => url('/') . '#website',
+                    'url' => url('/'),
+                    'name' => $siteName,
+                    'description' => 'Crea mensajes únicos y personalizados para las personas más especiales de tu vida.',
+                    'publisher' => ['@id' => url('/') . '#organization'],
+                    'inLanguage' => 'es-MX',
+                ],
+                [
+                    '@type' => 'WebPage',
+                    '@id' => $seoUrl . '#webpage',
+                    'url' => $seoUrl,
+                    'name' => $seoTitle,
+                    'description' => $seoDescription,
+                    'isPartOf' => ['@id' => url('/') . '#website'],
+                    'inLanguage' => 'es-MX',
+                ],
             ],
-            [
-                '@type' => 'WebSite',
-                '@id' => url('/') . '#website',
-                'url' => url('/'),
-                'name' => $siteName,
-                'description' => 'Crea mensajes únicos y personalizados para las personas más especiales de tu vida.',
-                'publisher' => ['@id' => url('/') . '#organization'],
-                'inLanguage' => 'es-MX',
-            ],
-            [
-                '@type' => 'WebPage',
-                '@id' => $seoUrl . '#webpage',
-                'url' => $seoUrl,
-                'name' => $seoTitle,
-                'description' => $seoDescription,
-                'isPartOf' => ['@id' => url('/') . '#website'],
-                'inLanguage' => 'es-MX',
-            ],
-        ],
-    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
-    </script>
+        ];
+    @endphp
+    <script type="application/ld+json">{!! json_encode($jsonLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}</script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')

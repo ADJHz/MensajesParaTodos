@@ -172,26 +172,26 @@
                         Tu mensaje <span class="text-red-500">*</span>
                     </label>
                     <div class="mb-2 flex flex-wrap items-center gap-2">
-                        <div class="relative">
+                        <div class="relative" @click.outside="emojiPanelAbierto = false">
                             <button type="button"
                                     @click="emojiPanelAbierto = !emojiPanelAbierto; stickerPanelAbierto = false"
                                     class="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-violet-200 bg-violet-50 text-violet-700 text-sm font-semibold hover:bg-violet-100 transition">
                                 <span>😊</span>
                                 <span>Emojis</span>
                             </button>
-                            <div x-show="emojiPanelAbierto" x-cloak @click.outside="emojiPanelAbierto = false"
+                            <div x-show="emojiPanelAbierto" x-cloak
                                  class="absolute left-0 top-12 z-20 w-[320px] max-w-[85vw] rounded-2xl border border-violet-100 bg-white shadow-2xl p-2">
                                 <emoji-picker x-ref="editarEmojiPicker" class="light app-emoji-picker" locale="es"></emoji-picker>
                             </div>
                         </div>
-                        <div class="relative">
+                        <div class="relative" @click.outside="stickerPanelAbierto = false">
                             <button type="button"
                                     @click="stickerPanelAbierto = !stickerPanelAbierto; emojiPanelAbierto = false"
                                     class="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-pink-200 bg-pink-50 text-pink-700 text-sm font-semibold hover:bg-pink-100 transition">
                                 <span>🎀</span>
                                 <span>Stickers</span>
                             </button>
-                            <div x-show="stickerPanelAbierto" x-cloak @click.outside="stickerPanelAbierto = false"
+                            <div x-show="stickerPanelAbierto" x-cloak
                                  class="absolute left-0 top-12 z-20 w-72 max-w-[85vw] rounded-2xl border border-pink-100 bg-white shadow-2xl p-3">
                                 <p class="text-xs font-semibold text-gray-500 mb-2">Agrégalos al mensaje</p>
                                 <div class="grid grid-cols-4 gap-2">

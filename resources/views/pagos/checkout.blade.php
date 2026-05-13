@@ -36,7 +36,6 @@
                 <span class="font-bold text-gray-700">Total</span>
                 <span class="font-extrabold text-violet-700 text-lg">${{ number_format($montoMxn, 2) }} MXN</span>
             </div>
-            <p class="text-xs text-gray-400 text-center">≈ ${{ number_format($aproxUsd, 2) }} USD</p>
         </div>
     </div>
 

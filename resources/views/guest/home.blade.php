@@ -49,7 +49,7 @@
             {{-- Stats --}}
             <div class="mt-12 grid grid-cols-3 gap-4 max-w-sm mx-auto text-center">
                 <div><div class="text-2xl font-extrabold text-yellow-300">15+</div><div class="text-xs text-purple-200">Ocasiones</div></div>
-                <div><div class="text-2xl font-extrabold text-yellow-300">$5</div><div class="text-xs text-purple-200">USD por mensaje</div></div>
+                <div><div class="text-2xl font-extrabold text-yellow-300">$50</div><div class="text-xs text-purple-200">MXN por mensaje</div></div>
                 <div><div class="text-2xl font-extrabold text-yellow-300">∞</div><div class="text-xs text-purple-200">Amor enviado</div></div>
             </div>
         </div>
@@ -64,7 +64,7 @@
                 @foreach([
                     ['emoji' => '🎯', 'paso' => '1', 'titulo' => 'Elige la ocasión', 'desc' => 'Selecciona para quién es el mensaje y qué estás celebrando.'],
                     ['emoji' => '✍️', 'paso' => '2', 'titulo' => 'Personaliza', 'desc' => 'Escribe tu mensaje, agrega una canción de YouTube y el nombre del destinatario.'],
-                    ['emoji' => '🚀', 'paso' => '3', 'titulo' => 'Envía el link', 'desc' => 'Paga $5 USD y comparte el link mágico con quien amas. ¡Lo recordará para siempre!'],
+                    ['emoji' => '🚀', 'paso' => '3', 'titulo' => 'Envía el link', 'desc' => 'Paga $50 MXN y comparte el link mágico con quien amas. ¡Lo recordará para siempre!'],
                 ] as $step)
                 <div class="text-center p-6 rounded-2xl bg-violet-50 border border-violet-100">
                     <div class="text-4xl mb-3">{{ $step['emoji'] }}</div>
@@ -170,7 +170,7 @@
             <h2 class="font-app-heading text-3xl sm:text-4xl font-extrabold mb-4">
                 Regala palabras que duran para siempre
             </h2>
-            <p class="text-purple-100 mb-8 text-lg">Solo $5 USD (~$100 MXN) · Un link único · Música incluida</p>
+            <p class="text-purple-100 mb-8 text-lg">Solo $50 MXN · Un link único · Música incluida</p>
             <a href="{{ route('register') }}" class="px-10 py-4 bg-white text-violet-700 font-extrabold text-lg rounded-full hover:bg-yellow-50 transition shadow-lg inline-block">
                 🚀 Empezar ahora
             </a>

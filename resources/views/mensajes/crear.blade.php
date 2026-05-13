@@ -537,8 +537,7 @@
 
                 <div class="bg-gradient-to-r from-violet-600 to-indigo-600 text-white rounded-2xl p-5 text-center shadow-lg shadow-violet-200">
                   <p class="text-violet-200 text-xs mb-1">Precio único · Pago seguro</p>
-                  <p class="text-4xl font-extrabold">$5 <span class="text-xl">USD</span></p>
-                  <p class="text-violet-200 text-xs mt-1">≈ $100 MXN</p>
+                  <p class="text-4xl font-extrabold">$50 <span class="text-xl">MXN</span></p>
                   <div class="mt-3 grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-center gap-2 sm:gap-4 text-xs text-violet-200">
                     <span>✅ Link único</span><span>✅ Diseño especial</span><span>✅ Para siempre</span>
                   </div>

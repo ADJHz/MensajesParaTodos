@@ -1,5 +1,6 @@
 @extends('layouts.auth')
 @section('title', 'Iniciar sesión')
+@section('description', 'Inicia sesión en Mensajes para Todos para crear y gestionar tus dedicatorias personalizadas con música y animaciones. 💌')
 
 @section('content')
 <div class="bg-white rounded-3xl shadow-xl p-8 border border-violet-100">

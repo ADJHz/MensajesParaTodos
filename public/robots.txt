@@ -1,2 +1,20 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /dashboard
+Disallow: /mis-mensajes
+Disallow: /mensajes/crear
+Disallow: /mensajes/*/editar
+Disallow: /mensaje/
+Disallow: /para-mama/
+Disallow: /pago/
+Disallow: /api/
+Disallow: /tts
+Disallow: /webhook/
+Disallow: /logout
+
+# Permitir assets estáticos
+Allow: /build/
+Allow: /favicon.svg
+Allow: /og-image.png
+
+Sitemap: https://mensajesparatodos.onrender.com/sitemap.xml

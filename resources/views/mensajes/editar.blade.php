@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Editar mensaje — '.$mensaje->destinatario)
+@section('robots', 'noindex, nofollow')
 
 @push('styles')
 <style>

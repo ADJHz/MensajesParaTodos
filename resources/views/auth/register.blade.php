@@ -1,5 +1,6 @@
 @extends('layouts.auth')
 @section('title', 'Crear cuenta')
+@section('description', 'Regístrate gratis en Mensajes para Todos y empieza a crear dedicatorias únicas con música, fotos y animaciones para regalar a quien más quieres. ✨')
 
 @section('content')
 <div class="bg-white rounded-3xl shadow-xl p-8 border border-violet-100">

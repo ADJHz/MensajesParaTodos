@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', '¡Pago exitoso! 🎉')
+@section('robots', 'noindex, nofollow')
 
 @section('content')
 <div class="max-w-lg mx-auto px-4 py-16 text-center">

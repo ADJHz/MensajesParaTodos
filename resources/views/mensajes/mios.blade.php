@@ -2,6 +2,7 @@
 @extends('layouts.app')
 
 @section('title', 'Mis Mensajes')
+@section('robots', 'noindex, nofollow')
 
 @section('content')
 <div class="max-w-6xl mx-auto px-4 py-12">

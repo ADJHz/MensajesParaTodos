@@ -16,6 +16,32 @@ use Illuminate\Support\Facades\Route;
 // ─── Página pública (home de la plataforma) ──────────────────────────────────
 Route::get('/', [GuestController::class, 'index'])->name('home');
 
+// ─── Sitemap XML dinámico para motores de búsqueda ───────────────────────────
+Route::get('/sitemap.xml', function () {
+    $base = rtrim(config('app.url'), '/');
+    $hoy  = now()->toDateString();
+
+    $rutas = [
+        ['loc' => $base . '/',          'priority' => '1.0', 'changefreq' => 'weekly'],
+        ['loc' => $base . '/login',     'priority' => '0.5', 'changefreq' => 'yearly'],
+        ['loc' => $base . '/register',  'priority' => '0.7', 'changefreq' => 'yearly'],
+    ];
+
+    $xml  = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+    foreach ($rutas as $r) {
+        $xml .= "  <url>\n";
+        $xml .= "    <loc>{$r['loc']}</loc>\n";
+        $xml .= "    <lastmod>{$hoy}</lastmod>\n";
+        $xml .= "    <changefreq>{$r['changefreq']}</changefreq>\n";
+        $xml .= "    <priority>{$r['priority']}</priority>\n";
+        $xml .= "  </url>\n";
+    }
+    $xml .= '</urlset>';
+
+    return response($xml, 200, ['Content-Type' => 'application/xml; charset=UTF-8']);
+})->name('sitemap');
+
 // ─── Autenticación ───────────────────────────────────────────────────────────
 Route::middleware('guest')->group(function () {
     Route::get('/login',                [LoginController::class,    'show'])->name('login');

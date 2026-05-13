@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Crear mensaje' . ($ocasion ? ' — ' . $ocasion->nombre : ''))
+@section('robots', 'noindex, nofollow')
 
 @section('content')
 

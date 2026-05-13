@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Mensaje para ' . $mensaje->destinatario)
+@section('robots', 'noindex, nofollow')
 
 @section('content')
 @php

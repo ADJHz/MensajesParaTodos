@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Mi Estudio Creativo')
+@section('robots', 'noindex, nofollow')
 
 @section('content')
 <div x-data="dashboard()" class="max-w-6xl mx-auto px-4 py-12">

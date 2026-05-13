@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Mensajes para Todos — Palabras que llegan al corazón')
+@section('description', 'Crea mensajes únicos y personalizados con música, animaciones y un link inolvidable. Ideal para cumpleaños, aniversarios, Día de las Madres, San Valentín y cualquier ocasión especial. Envía amor en segundos. 💌')
+@section('keywords', 'mensajes personalizados, dedicatorias con música, tarjetas digitales, cartas de amor online, regalos digitales, mensajes para mamá, mensajes para novia, mensajes para novio, dedicatorias de cumpleaños, san valentín, día de las madres, mensajes para todos')
 
 @push('head')
 <style>

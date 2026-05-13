@@ -1,14 +1,101 @@
 <!DOCTYPE html>
+@php
+    $seoTitle       = trim($__env->yieldContent('title', 'Mensajes para Todos — Palabras que llegan al corazón'));
+    $seoDescription = trim($__env->yieldContent('description', 'Crea mensajes únicos y personalizados con música, animaciones y un link inolvidable. Ideal para cumpleaños, aniversarios, Día de las Madres, San Valentín y cualquier ocasión especial. Envía amor en segundos. 💌'));
+    $seoKeywords    = trim($__env->yieldContent('keywords', 'mensajes personalizados, dedicatorias, tarjetas digitales, cartas de amor, mensajes con música, regalos digitales, dedicatorias online, día de las madres, san valentín, cumpleaños, aniversario, mensajes para todos, mensajes para mamá, mensajes para novia, mensajes para novio'));
+    $seoImage       = trim($__env->yieldContent('og_image', url('/og-image.png')));
+    $seoUrl         = trim($__env->yieldContent('canonical', url()->current()));
+    $seoType        = trim($__env->yieldContent('og_type', 'website'));
+    $seoRobots      = trim($__env->yieldContent('robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'));
+    $siteName       = config('app.name', 'Mensajes para Todos');
+@endphp
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@yield('title', 'Mensajes para Todos') · 💌</title>
+    <title>{{ $seoTitle }} · 💌</title>
+
+    {{-- SEO básico --}}
+    <meta name="description" content="{{ $seoDescription }}" />
+    <meta name="keywords" content="{{ $seoKeywords }}" />
+    <meta name="author" content="{{ $siteName }}" />
+    <meta name="robots" content="{{ $seoRobots }}" />
+    <meta name="googlebot" content="{{ $seoRobots }}" />
+    <meta name="bingbot" content="{{ $seoRobots }}" />
+    <meta name="language" content="Spanish" />
+    <meta name="geo.region" content="MX" />
+    <meta name="geo.placename" content="México" />
+    <link rel="canonical" href="{{ $seoUrl }}" />
+    <link rel="alternate" hreflang="es" href="{{ $seoUrl }}" />
+    <link rel="alternate" hreflang="x-default" href="{{ $seoUrl }}" />
+
+    {{-- Open Graph (Facebook / WhatsApp / LinkedIn) --}}
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:type" content="{{ $seoType }}" />
+    <meta property="og:site_name" content="{{ $siteName }}" />
+    <meta property="og:title" content="{{ $seoTitle }}" />
+    <meta property="og:description" content="{{ $seoDescription }}" />
+    <meta property="og:url" content="{{ $seoUrl }}" />
+    <meta property="og:image" content="{{ $seoImage }}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="{{ $seoTitle }}" />
+
+    {{-- Twitter / X --}}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ $seoTitle }}" />
+    <meta name="twitter:description" content="{{ $seoDescription }}" />
+    <meta name="twitter:image" content="{{ $seoImage }}" />
+
+    {{-- Iconos / PWA --}}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
     <meta name="theme-color" content="#7C3AED" />
+    <meta name="apple-mobile-web-app-title" content="{{ $siteName }}" />
+    <meta name="application-name" content="{{ $siteName }}" />
+    <meta name="format-detection" content="telephone=no" />
+
+    {{-- Performance: preconnect --}}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+
+    {{-- JSON-LD: WebSite + Organization (mejora rich results) --}}
+    <script type="application/ld+json">
+    @json([
+        '@context' => 'https://schema.org',
+        '@graph' => [
+            [
+                '@type' => 'Organization',
+                '@id' => url('/') . '#organization',
+                'name' => $siteName,
+                'url' => url('/'),
+                'logo' => url('/favicon.svg'),
+                'description' => 'Plataforma para crear mensajes personalizados con música, animaciones y un link único.',
+                'sameAs' => [],
+            ],
+            [
+                '@type' => 'WebSite',
+                '@id' => url('/') . '#website',
+                'url' => url('/'),
+                'name' => $siteName,
+                'description' => 'Crea mensajes únicos y personalizados para las personas más especiales de tu vida.',
+                'publisher' => ['@id' => url('/') . '#organization'],
+                'inLanguage' => 'es-MX',
+            ],
+            [
+                '@type' => 'WebPage',
+                '@id' => $seoUrl . '#webpage',
+                'url' => $seoUrl,
+                'name' => $seoTitle,
+                'description' => $seoDescription,
+                'isPartOf' => ['@id' => url('/') . '#website'],
+                'inLanguage' => 'es-MX',
+            ],
+        ],
+    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+    </script>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
     @stack('head')

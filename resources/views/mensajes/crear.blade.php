@@ -309,7 +309,7 @@
                       <span class="text-xs text-gray-400" x-text="mensajeCharCount + ' car.'"></span>
                     </div>
                     {{-- Toolbar --}}
-                    <div class="overflow-x-auto overflow-y-visible -mx-2 px-2 pb-2">
+                    <div class="overflow-x-auto -mx-2 px-2 pb-2">
                       <div class="flex items-center gap-1 min-w-max px-2 py-1.5 bg-gray-50 border border-gray-200 rounded-t-xl select-none">
                         <button type="button" @mousedown.prevent="formatear('bold')" title="Negrita (Ctrl+B)"
                                 class="min-h-10 min-w-10 flex items-center justify-center rounded-lg font-extrabold text-sm transition"
@@ -354,32 +354,36 @@
                                 class="min-h-10 min-w-10 flex items-center justify-center rounded-lg text-gray-500 transition hover:bg-red-100 hover:text-red-500">
                           <svg viewBox="0 0 20 20" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 17h6m1-8l4-4M5 15l10-10M8 17l9-9"/></svg>
                         </button>
-                        <div class="w-px h-5 bg-gray-200 mx-0.5"></div>
-                        <div class="relative" @click.outside="emojiPanelAbierto = false">
-                          <button type="button"
-                                  @mousedown.prevent="guardarSeleccionEditor(); emojiPanelAbierto = !emojiPanelAbierto; stickerPanelAbierto = false"
-                                  title="Agregar emoji"
-                                  class="min-h-10 min-w-10 flex items-center justify-center rounded-lg text-gray-700 transition bg-white hover:bg-violet-100">😊</button>
-                          <div x-show="emojiPanelAbierto" x-cloak
-                               class="absolute top-12 right-0 z-20 w-[320px] max-w-[85vw] rounded-2xl border border-violet-100 bg-white shadow-2xl p-2">
-                            <emoji-picker x-ref="crearEmojiPicker" class="light app-emoji-picker" locale="es"></emoji-picker>
-                          </div>
+                      </div>
+                    </div>
+                    {{-- Emojis & stickers (fuera del toolbar para que el popover no se recorte) --}}
+                    <div class="flex flex-wrap items-center gap-2 mt-2">
+                      <div class="relative" @click.outside="emojiPanelAbierto = false">
+                        <button type="button"
+                                @mousedown.prevent="guardarSeleccionEditor(); emojiPanelAbierto = !emojiPanelAbierto; stickerPanelAbierto = false"
+                                class="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-violet-200 bg-violet-50 text-violet-700 text-sm font-semibold hover:bg-violet-100 transition">
+                          <span>😊</span><span>Emojis</span>
+                        </button>
+                        <div x-show="emojiPanelAbierto" x-cloak
+                             class="absolute left-0 top-12 z-30 w-[320px] max-w-[85vw] rounded-2xl border border-violet-100 bg-white shadow-2xl p-2">
+                          <emoji-picker x-ref="crearEmojiPicker" class="light app-emoji-picker" locale="es"></emoji-picker>
                         </div>
-                        <div class="relative" @click.outside="stickerPanelAbierto = false">
-                          <button type="button"
-                                  @mousedown.prevent="guardarSeleccionEditor(); stickerPanelAbierto = !stickerPanelAbierto; emojiPanelAbierto = false"
-                                  title="Agregar sticker"
-                                  class="min-h-10 px-3 flex items-center justify-center rounded-lg text-gray-700 transition bg-white hover:bg-violet-100 text-sm font-semibold">Stickers</button>
-                          <div x-show="stickerPanelAbierto" x-cloak
-                               class="absolute top-12 right-0 z-20 w-72 max-w-[85vw] rounded-2xl border border-pink-100 bg-white shadow-2xl p-3">
-                            <p class="text-xs font-semibold text-gray-500 mb-2">Toca uno para insertarlo</p>
-                            <div class="grid grid-cols-4 gap-2">
-                              @foreach(['💖','✨','🌸','🎀','🦋','🥰','💐','🌷','💘','⭐','💕','🤍'] as $sticker)
-                                <button type="button"
-                                        @click="insertarSticker('{{ $sticker }}')"
-                                        class="h-11 rounded-xl border border-pink-100 bg-pink-50 hover:bg-pink-100 text-2xl transition">{{ $sticker }}</button>
-                              @endforeach
-                            </div>
+                      </div>
+                      <div class="relative" @click.outside="stickerPanelAbierto = false">
+                        <button type="button"
+                                @mousedown.prevent="guardarSeleccionEditor(); stickerPanelAbierto = !stickerPanelAbierto; emojiPanelAbierto = false"
+                                class="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-pink-200 bg-pink-50 text-pink-700 text-sm font-semibold hover:bg-pink-100 transition">
+                          <span>🎀</span><span>Stickers</span>
+                        </button>
+                        <div x-show="stickerPanelAbierto" x-cloak
+                             class="absolute left-0 top-12 z-30 w-72 max-w-[85vw] rounded-2xl border border-pink-100 bg-white shadow-2xl p-3">
+                          <p class="text-xs font-semibold text-gray-500 mb-2">Toca uno para insertarlo</p>
+                          <div class="grid grid-cols-4 gap-2">
+                            @foreach(['💖','✨','🌸','🎀','🦋','🥰','💐','🌷','💘','⭐','💕','🤍'] as $sticker)
+                              <button type="button"
+                                      @mousedown.prevent="insertarSticker('{{ $sticker }}')"
+                                      class="h-11 rounded-xl border border-pink-100 bg-pink-50 hover:bg-pink-100 text-2xl transition">{{ $sticker }}</button>
+                            @endforeach
                           </div>
                         </div>
                       </div>
